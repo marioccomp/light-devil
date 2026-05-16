@@ -1,0 +1,22 @@
+# Godot 4 - arquivos gerados automaticamente
+.godot/
+
+# Android export local
+/android/
+
+# Builds / exports
+builds/
+exports/
+*.exe
+*.apk
+*.aab
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# VS Code, se você usar
+.vscode/

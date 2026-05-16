@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://c8uyovw1ciybn"]
+
+[ext_resource type="Script" uid="uid://dvuwv5fwp42xo" path="res://scripts/false_floor.gd" id="1_2djvx"]
+[ext_resource type="Script" uid="uid://4k7o0facxalq" path="res://scripts/death_zone.gd" id="1_i2aat"]
+[ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="2_2djvx"]
+[ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="3_qdh5e"]
+[ext_resource type="Script" uid="uid://cutr5lrhap1ng" path="res://scripts/trap_trigger.gd" id="4_qdh5e"]
+[ext_resource type="Script" uid="uid://c5tgmoj3vida2" path="res://scripts/end_death_block.gd" id="5_50wog"]
+[ext_resource type="Script" uid="uid://chiadxx2o7eie" path="res://scripts/exit_door.gd" id="5_t0hvh"]
+[ext_resource type="Script" uid="uid://8igppe4ou8ke" path="res://scripts/level_manager.gd" id="7_1ey3t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvc87"]
+size = Vector2(240, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdh5e"]
+size = Vector2(80, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0hvh"]
+size = Vector2(80, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50wog"]
+size = Vector2(720, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ey3t"]
+size = Vector2(2000, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfebt"]
+size = Vector2(70, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r72dd"]
+size = Vector2(40, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijn0p"]
+size = Vector2(50, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmes4"]
+size = Vector2(50, 90)
+
+[node name="Level_01" type="Node2D" unique_id=543101429]
+
+[node name="World" type="Node2D" parent="." unique_id=767684852]
+
+[node name="GroundStart" type="StaticBody2D" parent="World" unique_id=2010060950]
+position = Vector2(160, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundStart" unique_id=1581111884]
+shape = SubResource("RectangleShape2D_uvc87")
+
+[node name="Visual" type="ColorRect" parent="World/GroundStart" unique_id=89198088]
+offset_left = -120.0
+offset_top = -20.0
+offset_right = 120.0
+offset_bottom = 20.0
+color = Color(0.556953, 0.556953, 0.556953, 1)
+
+[node name="FalseFloor" type="AnimatableBody2D" parent="World" unique_id=655850688]
+position = Vector2(320, 500)
+script = ExtResource("1_2djvx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor" unique_id=1335725260]
+shape = SubResource("RectangleShape2D_qdh5e")
+
+[node name="Visual" type="ColorRect" parent="World/FalseFloor" unique_id=718260382]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Detector" type="Area2D" parent="World/FalseFloor" unique_id=651528099]
+position = Vector2(0, -25)
+
+[node name="DetectorShape" type="CollisionShape2D" parent="World/FalseFloor/Detector" unique_id=2132106494]
+shape = SubResource("RectangleShape2D_t0hvh")
+
+[node name="GroundMain" type="StaticBody2D" parent="World" unique_id=2047209865]
+position = Vector2(760, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundMain" unique_id=1469329349]
+shape = SubResource("RectangleShape2D_50wog")
+
+[node name="Visual" type="ColorRect" parent="World/GroundMain" unique_id=1044585784]
+offset_left = -360.0
+offset_top = -20.0
+offset_right = 360.0
+offset_bottom = 20.0
+color = Color(0.5568628, 0.5568628, 0.5568628, 1)
+
+[node name="DeathZone" type="Area2D" parent="World" unique_id=716769776]
+position = Vector2(600, 680)
+script = ExtResource("1_i2aat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeathZone" unique_id=1060900570]
+shape = SubResource("RectangleShape2D_1ey3t")
+
+[node name="TrapBlock" type="Area2D" parent="World" unique_id=1392216005]
+position = Vector2(650, 210)
+script = ExtResource("3_qdh5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TrapBlock" unique_id=2116182806]
+shape = SubResource("RectangleShape2D_kfebt")
+
+[node name="ColorRect" type="ColorRect" parent="World/TrapBlock" unique_id=1528508259]
+offset_left = -35.0
+offset_top = -55.0
+offset_right = 35.0
+offset_bottom = 55.0
+color = Color(0.9525886, 0.07267093, 0.06108553, 1)
+
+[node name="TriggerLeft" type="Area2D" parent="World" unique_id=201555924]
+position = Vector2(606, 437)
+script = ExtResource("4_qdh5e")
+trap_block_path = NodePath("../TrapBlock")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TriggerLeft" unique_id=1228374539]
+shape = SubResource("RectangleShape2D_r72dd")
+
+[node name="Markers" type="Node2D" parent="World" unique_id=1885258038]
+
+[node name="FinalDoorMarker" type="Marker2D" parent="World/Markers" unique_id=919020940]
+position = Vector2(1050, 435)
+
+[node name="StartDoorMarker" type="Marker2D" parent="World/Markers" unique_id=604217684]
+position = Vector2(120, 435)
+
+[node name="ExitDoor" type="Area2D" parent="World" unique_id=2026676205]
+position = Vector2(1050, 435)
+script = ExtResource("5_t0hvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ExitDoor" unique_id=52139347]
+shape = SubResource("RectangleShape2D_ijn0p")
+
+[node name="Visual" type="ColorRect" parent="World/ExitDoor" unique_id=1869774844]
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = 45.0
+color = Color(0.8461248, 0.87464255, 0.9973914, 1)
+
+[node name="EndDeathBlock" type="Area2D" parent="World" unique_id=1449026605]
+position = Vector2(1050, 435)
+script = ExtResource("5_50wog")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/EndDeathBlock" unique_id=1814246766]
+shape = SubResource("RectangleShape2D_jmes4")
+
+[node name="Visual" type="ColorRect" parent="World/EndDeathBlock" unique_id=949585934]
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = 45.0
+
+[node name="Player" parent="." unique_id=574415046 instance=ExtResource("2_2djvx")]
+position = Vector2(120, 452)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=980039613]
+
+[node name="CompleteLabel" type="Label" parent="UI" unique_id=1099804597]
+visible = false
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 164.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 32
+text = "Tutorial concluído!"
+
+[node name="LevelManager" type="Node" parent="." unique_id=1096244592]
+script = ExtResource("7_1ey3t")
+end_death_block_offset = null
