@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 220.0
 @export var jump_force: float = -430.0
 @export var gravity: float = 1200.0
+@export var death_delay: float = 0.85
 
 @onready var anim: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
@@ -14,6 +15,10 @@ var dead := false
 func _ready() -> void:
 	if visual != null:
 		visual.visible = false
+
+	if anim != null and anim.sprite_frames != null:
+		if anim.sprite_frames.has_animation("death"):
+			anim.sprite_frames.set_animation_loop("death", false)
 
 	_play_anim("idle")
 
@@ -58,6 +63,9 @@ func _physics_process(delta: float) -> void:
 
 func _update_animation() -> void:
 	if anim == null:
+		return
+
+	if dead:
 		return
 
 	if not is_on_floor():
@@ -112,7 +120,12 @@ func die() -> void:
 		return
 
 	dead = true
+	input_locked = true
 	velocity = Vector2.ZERO
+
+	_play_anim("death")
+
+	await get_tree().create_timer(death_delay).timeout
 
 	var level_manager := get_node_or_null("../LevelManager")
 
