@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dvuwv5fwp42xo" path="res://scripts/false_floor.gd" id="1_2djvx"]
 [ext_resource type="Script" uid="uid://4k7o0facxalq" path="res://scripts/death_zone.gd" id="1_i2aat"]
 [ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="2_2djvx"]
-[ext_resource type="Texture2D" uid="uid://bflyl1880y5qs" path="res://assets/dungeon/doors/Window Transparent Gray 1.png" id="3_07lms"]
 [ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="3_qdh5e"]
 [ext_resource type="Texture2D" uid="uid://b1c55na37klcj" path="res://assets/dungeon/tiles/Black Grey Bricks ReOrganized.png" id="4_ijn0p"]
 [ext_resource type="Script" uid="uid://cutr5lrhap1ng" path="res://scripts/trap_trigger.gd" id="4_qdh5e"]
@@ -12,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cc1mw4cigokm5" path="res://assets/background/cave/6.png" id="5_svp4f"]
 [ext_resource type="Script" uid="uid://chiadxx2o7eie" path="res://scripts/exit_door.gd" id="5_t0hvh"]
 [ext_resource type="Texture2D" uid="uid://d1sncs2ljjko4" path="res://assets/background/cave/5.png" id="6_1b0o8"]
-[ext_resource type="Texture2D" uid="uid://6kwst2krf276" path="res://assets/dungeon/doors/Window Transparent Gray 2.png" id="6_kfebt"]
 [ext_resource type="Script" uid="uid://8igppe4ou8ke" path="res://scripts/level_manager.gd" id="7_1ey3t"]
 [ext_resource type="Texture2D" uid="uid://gqk3myibuovr" path="res://assets/background/cave/4.png" id="7_w4kkx"]
 [ext_resource type="Texture2D" uid="uid://ce1tq7vfke30t" path="res://assets/background/cave/3.png" id="8_mhiu8"]
@@ -24,49 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://cok808ubo4obo" path="res://assets/hazards/falling/boulder.png" id="15_w4kkx"]
 [ext_resource type="Texture2D" uid="uid://buq3s2mwalium" path="res://assets/hazards/traps/Pit_Trap_Spikes.png" id="18_svp4f"]
 [ext_resource type="Texture2D" uid="uid://c2tjesco78b10" path="res://assets/doors/cell_door_frames.png" id="18_w4kkx"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tyxjt"]
-texture = ExtResource("4_ijn0p")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-2:5/0 = 0
-3:5/0 = 0
-4:5/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_07lms"]
-sources/0 = SubResource("TileSetAtlasSource_tyxjt")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gi8m4"]
-load_path = "res://.godot/imported/Cobwebs 3.png-f9c5c6f24e136b601bc2d1e5f0cc0d70.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ijn0p"]
 texture = ExtResource("4_ijn0p")
@@ -556,38 +511,7 @@ size = Vector2(40, 120)
 
 [node name="Level_01" type="Node2D" unique_id=543101429]
 
-[node name="ParallaxBackground" type="Node2D" parent="." unique_id=1843096785]
-z_index = -100
-
-[node name="FarWallParallax" type="Parallax2D" parent="ParallaxBackground" unique_id=1490247369]
-visible = false
-scroll_scale = Vector2(0.2, 0)
-
-[node name="FarWallTiles" type="TileMapLayer" parent="ParallaxBackground/FarWallParallax" unique_id=1881856755]
-visible = false
-tile_set = SubResource("TileSet_07lms")
-
-[node name="MidDecorParallax" type="Parallax2D" parent="ParallaxBackground" unique_id=2019534553]
-visible = false
-scroll_scale = Vector2(0.45, 0)
-
-[node name="MidDecorations" type="Node2D" parent="ParallaxBackground/MidDecorParallax" unique_id=896829029]
-visible = false
-
-[node name="BackWindow01" type="Sprite2D" parent="ParallaxBackground/MidDecorParallax/MidDecorations" unique_id=2104022447]
-position = Vector2(550, 330)
-scale = Vector2(4, 4)
-texture = ExtResource("6_kfebt")
-
-[node name="BackWindow02" type="Sprite2D" parent="ParallaxBackground/MidDecorParallax/MidDecorations" unique_id=147628181]
-position = Vector2(950, 320)
-scale = Vector2(4, 4)
-texture = ExtResource("3_07lms")
-
-[node name="BackCobweb01" type="Sprite2D" parent="ParallaxBackground/MidDecorParallax/MidDecorations" unique_id=1738369003]
-position = Vector2(420, 360)
-scale = Vector2(3, 3)
-texture = SubResource("CompressedTexture2D_gi8m4")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1495983408]
 
 [node name="CaveBackColor" type="ParallaxLayer" parent="ParallaxBackground" unique_id=25161063]
 position = Vector2(-600, 0)
@@ -756,7 +680,7 @@ position = Vector2(-5, -30)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_droki")
 animation = &"roll"
-frame_progress = 0.25996757
+frame_progress = 0.18477245
 
 [node name="TriggerLeft" type="Area2D" parent="World" unique_id=201555924]
 position = Vector2(606, 437)
