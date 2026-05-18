@@ -47,3 +47,8 @@ func reset_false_floor() -> void:
 	collision_shape.set_deferred("disabled", false)
 	
 	activated = false
+
+
+func _on_area_2d_body_entered(body):
+	if body.name == "Player":
+		body.die()

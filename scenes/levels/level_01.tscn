@@ -19,9 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://cekv3xb2o23d3" path="res://assets/background/cave/1.png" id="10_uujh0"]
 [ext_resource type="Texture2D" uid="uid://dvvkc0h05208c" path="res://assets/tiles/Tiles.png" id="11_svp4f"]
 [ext_resource type="Texture2D" uid="uid://b3mxgp3lg0dwe" path="res://assets/dungeon/lights/Lamp 1.png" id="13_iu1m7"]
+[ext_resource type="Texture2D" uid="uid://bcclvr3cqna62" path="res://assets/dungeon/lights/Light 1.png" id="14_j6r3n"]
 [ext_resource type="Texture2D" uid="uid://cok808ubo4obo" path="res://assets/hazards/falling/boulder.png" id="15_w4kkx"]
 [ext_resource type="Texture2D" uid="uid://buq3s2mwalium" path="res://assets/hazards/traps/Pit_Trap_Spikes.png" id="18_svp4f"]
 [ext_resource type="Texture2D" uid="uid://c2tjesco78b10" path="res://assets/doors/cell_door_frames.png" id="18_w4kkx"]
+[ext_resource type="Texture2D" uid="uid://b6o6se34wnkxx" path="res://assets/dungeon/hazards/armadilha2.png" id="24_w4kkx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ijn0p"]
 texture = ExtResource("4_ijn0p")
@@ -265,6 +267,9 @@ size = Vector2(2000, 100)
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhiu8"]
 radius = 47.010635
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1b0o8"]
+light_mode = 2
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3xboy"]
 atlas = ExtResource("15_w4kkx")
 region = Rect2(0, 0, 32, 32)
@@ -362,6 +367,12 @@ size = Vector2(40, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijn0p"]
 size = Vector2(48, 63)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w4kkx"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhiu8"]
 atlas = ExtResource("18_w4kkx")
@@ -507,7 +518,15 @@ size = Vector2(160, 105)
 size = Vector2(32, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyxjt"]
-size = Vector2(40, 120)
+size = Vector2(40, 117.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mhiu8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lswbx"]
+light_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhiu8"]
+size = Vector2(1256.8994, 494.4214)
 
 [node name="Level_01" type="Node2D" unique_id=543101429]
 
@@ -519,6 +538,7 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveBackColor" unique_id=1086203116]
+position = Vector2(273.99997, 153)
 scale = Vector2(5.776041, 3.9629629)
 texture = ExtResource("4_vrcmr")
 centered = false
@@ -529,7 +549,7 @@ motion_scale = Vector2(0.08, 0.02)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer06" unique_id=941871354]
-position = Vector2(-304, 0)
+position = Vector2(-322, 11)
 scale = Vector2(5.7916665, 3.9583335)
 texture = ExtResource("5_svp4f")
 centered = false
@@ -676,6 +696,7 @@ color = Color(0.9525886, 0.07267093, 0.06108553, 1)
 
 [node name="TrapSprite" type="AnimatedSprite2D" parent="World/TrapBlock" unique_id=432477037]
 z_index = 5
+material = SubResource("CanvasItemMaterial_1b0o8")
 position = Vector2(-5, -30)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_droki")
@@ -715,6 +736,7 @@ offset_bottom = 45.0
 color = Color(0.8461248, 0.87464255, 0.9973914, 1)
 
 [node name="DoorSprite" type="AnimatedSprite2D" parent="World/ExitDoor" unique_id=1186570649]
+material = SubResource("CanvasItemMaterial_w4kkx")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_qy4h0")
 animation = &"close"
@@ -751,11 +773,13 @@ trap_block_path = NodePath("../TrapBlock")
 starts_enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/TriggerRight" unique_id=1051706450]
+position = Vector2(3, -4.75)
 shape = SubResource("RectangleShape2D_tyxjt")
 
 [node name="Decorations" type="Node2D" parent="World" unique_id=565888550]
 
 [node name="Skull01" type="Sprite2D" parent="World/Decorations" unique_id=1552341201]
+material = SubResource("CanvasItemMaterial_mhiu8")
 position = Vector2(600, 455)
 scale = Vector2(3, 3)
 texture = ExtResource("10_cwffn")
@@ -767,8 +791,19 @@ position = Vector2(61, 456.00003)
 scale = Vector2(3, 3)
 texture = ExtResource("13_iu1m7")
 
+[node name="PointLight2D" type="PointLight2D" parent="World/LightObjects/Lamp01" unique_id=1058194278]
+position = Vector2(141.33334, 3)
+scale = Vector2(0.09259258, 0.043981448)
+color = Color(1, 0.8352941, 0.54509807, 1)
+energy = 1.8
+texture = ExtResource("14_j6r3n")
+texture_scale = 18.0
+
 [node name="Player" parent="." unique_id=574415046 instance=ExtResource("2_2djvx")]
-position = Vector2(120, 456)
+position = Vector2(122, 456)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1626238330]
+color = Color(0.42, 0.44, 0.5, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=980039613]
 
@@ -842,3 +877,20 @@ text = "Você morreu."
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("7_1ey3t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1344292889]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1679303549]
+material = SubResource("CanvasItemMaterial_lswbx")
+position = Vector2(834, 469.99997)
+scale = Vector2(0.03645831, 0.0390625)
+texture = ExtResource("24_w4kkx")
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D/Sprite2D" unique_id=325723601]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Sprite2D/Area2D" unique_id=1081327035]
+position = Vector2(6.4277344, 53.964844)
+scale = Vector2(0.9999998, 1)
+shape = SubResource("RectangleShape2D_mhiu8")
+
+[connection signal="body_entered" from="StaticBody2D/Sprite2D/Area2D" to="World/FalseFloor" method="_on_area_2d_body_entered"]

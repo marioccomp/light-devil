@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bebp4tnedck5x"]
+
+[ext_resource type="Script" uid="uid://ceq78w16cs2ad" path="res://scripts/pet.gd" id="1_5m9vb"]
+[ext_resource type="Texture2D" uid="uid://dgjb788bvile1" path="res://assets/characters/pet/Wisp with outline.png" id="2_6h2kr"]
+[ext_resource type="Texture2D" uid="uid://2o04icmgrs0t" path="res://assets/dungeon/lights/luz_raio_200px.png" id="3_kqaqx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
+atlas = ExtResource("2_6h2kr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
+atlas = ExtResource("2_6h2kr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
+atlas = ExtResource("2_6h2kr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28m0y"]
+atlas = ExtResource("2_6h2kr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
+atlas = ExtResource("2_6h2kr")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqsei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_007i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cv16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4nxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28m0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uniwh")
+}],
+"loop": true,
+"name": &"float",
+"speed": 8.0
+}]
+
+[node name="Pet" type="Node2D" unique_id=74590169]
+script = ExtResource("1_5m9vb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1897646128]
+position = Vector2(0, -8)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_iqsei")
+animation = &"float"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1752693253]
+position = Vector2(60, 15)
+enabled = false
+color = Color(0.57254905, 0.88235295, 1, 1)
+energy = 0.0
+texture = ExtResource("3_kqaqx")
+texture_scale = 0.5

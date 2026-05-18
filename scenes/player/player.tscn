@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://cc2smavx65av3" path="res://scripts/player.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://cvxwawciemsk3" path="res://scripts/camera_2d.gd" id="2_dovo2"]
 [ext_resource type="Texture2D" uid="uid://0jujtn5vkb5e" path="res://assets/characters/player/explorer_player_basic.png" id="3_gmlin"]
-[ext_resource type="Script" uid="uid://ceq78w16cs2ad" path="res://scripts/pet.gd" id="4_p47bc"]
-[ext_resource type="Texture2D" uid="uid://dgjb788bvile1" path="res://assets/characters/pet/Wisp with outline.png" id="5_75vfm"]
+[ext_resource type="PackedScene" path="res://scenes/player/pet.tscn" id="4_8oqyy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7p2l"]
 size = Vector2(27, 65)
@@ -254,49 +253,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
-atlas = ExtResource("5_75vfm")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
-atlas = ExtResource("5_75vfm")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
-atlas = ExtResource("5_75vfm")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_28m0y"]
-atlas = ExtResource("5_75vfm")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
-atlas = ExtResource("5_75vfm")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_iqsei"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_007i1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6cv16")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j4nxn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_28m0y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uniwh")
-}],
-"loop": true,
-"name": &"float",
-"speed": 8.0
-}]
-
 [node name="Player" type="CharacterBody2D" unique_id=574415046]
 script = ExtResource("1_8afob")
 
@@ -323,10 +279,4 @@ scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"death"
 
-[node name="Pet" type="Node2D" parent="." unique_id=903533663]
-script = ExtResource("4_p47bc")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pet" unique_id=1809273902]
-scale = Vector2(1.3, 1.3)
-sprite_frames = SubResource("SpriteFrames_iqsei")
-animation = &"float"
+[node name="Pet" parent="." unique_id=903533663 instance=ExtResource("4_8oqyy")]
