@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ceq78w16cs2ad" path="res://scripts/pet.gd" id="1_5m9vb"]
 [ext_resource type="Texture2D" uid="uid://dgjb788bvile1" path="res://assets/characters/pet/Wisp with outline.png" id="2_6h2kr"]
-[ext_resource type="Texture2D" uid="uid://2o04icmgrs0t" path="res://assets/dungeon/lights/luz_raio_200px.png" id="3_kqaqx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
 atlas = ExtResource("2_6h2kr")
@@ -47,6 +46,11 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_l80j0"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kqaqx"]
+gradient = SubResource("Gradient_l80j0")
+
 [node name="Pet" type="Node2D" unique_id=74590169]
 script = ExtResource("1_5m9vb")
 
@@ -57,9 +61,10 @@ sprite_frames = SubResource("SpriteFrames_iqsei")
 animation = &"float"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1752693253]
-position = Vector2(60, 15)
+position = Vector2(1, -3)
+scale = Vector2(2.5, 2.15625)
 enabled = false
 color = Color(0.57254905, 0.88235295, 1, 1)
-energy = 0.0
-texture = ExtResource("3_kqaqx")
+energy = 16.0
+texture = SubResource("GradientTexture2D_kqaqx")
 texture_scale = 0.5

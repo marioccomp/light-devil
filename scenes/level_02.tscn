@@ -1,0 +1,559 @@
+[gd_scene format=4 uid="uid://52eek05dxg4c"]
+
+[ext_resource type="Texture2D" uid="uid://dx8t6h8pbysy0" path="res://assets/background/cave/7.png" id="1_7hevf"]
+[ext_resource type="Texture2D" uid="uid://cc1mw4cigokm5" path="res://assets/background/cave/6.png" id="2_tmoxt"]
+[ext_resource type="Texture2D" uid="uid://d1sncs2ljjko4" path="res://assets/background/cave/5.png" id="3_r2fl4"]
+[ext_resource type="Texture2D" uid="uid://gqk3myibuovr" path="res://assets/background/cave/4.png" id="4_s1jqf"]
+[ext_resource type="Texture2D" uid="uid://ce1tq7vfke30t" path="res://assets/background/cave/3.png" id="5_rndxe"]
+[ext_resource type="Texture2D" uid="uid://dhqwirw62rx5d" path="res://assets/background/cave/2.png" id="6_rqluw"]
+[ext_resource type="Texture2D" uid="uid://cekv3xb2o23d3" path="res://assets/background/cave/1.png" id="7_rsdo6"]
+[ext_resource type="Texture2D" uid="uid://b1c55na37klcj" path="res://assets/dungeon/tiles/Black Grey Bricks ReOrganized.png" id="8_knlx7"]
+[ext_resource type="Texture2D" uid="uid://dvvkc0h05208c" path="res://assets/Tiles.png" id="9_fpkvo"]
+[ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="12_tclt5"]
+[ext_resource type="Script" uid="uid://chiadxx2o7eie" path="res://scripts/exit_door.gd" id="15_0062h"]
+[ext_resource type="Script" uid="uid://dvuwv5fwp42xo" path="res://scripts/false_floor.gd" id="17_68jev"]
+[ext_resource type="Script" uid="uid://c5tgmoj3vida2" path="res://scripts/end_death_block.gd" id="17_aeapf"]
+[ext_resource type="Texture2D" uid="uid://buq3s2mwalium" path="res://assets/hazards/traps/Pit_Trap_Spikes.png" id="18_5yyxg"]
+[ext_resource type="Texture2D" uid="uid://b3mxgp3lg0dwe" path="res://assets/dungeon/lights/Lamp 1.png" id="20_gu5p2"]
+[ext_resource type="Texture2D" uid="uid://bcclvr3cqna62" path="res://assets/dungeon/lights/Light 1.png" id="21_n33p4"]
+[ext_resource type="Script" uid="uid://c06amtv108yqt" path="res://scripts/flickering_light_2d.gd" id="22_g4exc"]
+[ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="23_tlj46"]
+[ext_resource type="Script" uid="uid://8igppe4ou8ke" path="res://scripts/level_manager.gd" id="24_uhtot"]
+[ext_resource type="Texture2D" uid="uid://b6o6se34wnkxx" path="res://assets/dungeon/hazards/armadilha2.png" id="25_3jkbg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ijn0p"]
+texture = ExtResource("8_knlx7")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1b0o8"]
+texture = ExtResource("9_fpkvo")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jmes4"]
+sources/2 = SubResource("TileSetAtlasSource_ijn0p")
+sources/3 = SubResource("TileSetAtlasSource_1b0o8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmes4"]
+size = Vector2(34, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdh5e"]
+size = Vector2(98, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37jkp"]
+size = Vector2(80, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci1t6"]
+size = Vector2(80, 22)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ocwh6"]
+texture = ExtResource("8_knlx7")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thh7q"]
+texture = ExtResource("9_fpkvo")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7hevf"]
+sources/0 = SubResource("TileSetAtlasSource_ocwh6")
+sources/1 = SubResource("TileSetAtlasSource_thh7q")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lswbx"]
+light_mode = 2
+
+[node name="Level_01" type="Node2D" unique_id=543101429]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1495983408]
+
+[node name="CaveBackColor" type="ParallaxLayer" parent="ParallaxBackground" unique_id=25161063]
+position = Vector2(-600, 0)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveBackColor" unique_id=1086203116]
+position = Vector2(570, 60.999985)
+scale = Vector2(5.776041, 3.9629629)
+texture = ExtResource("1_7hevf")
+centered = false
+
+[node name="Visual" type="ColorRect" parent="ParallaxBackground/CaveBackColor/Sprite2D" unique_id=1792688773]
+offset_left = -147.0
+offset_top = -244.0
+offset_right = 93.0
+offset_bottom = -204.0
+color = Color(0.556953, 0.556953, 0.556953, 1)
+
+[node name="CaveLayer06" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1723929648]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.08, 0.02)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer06" unique_id=941871354]
+position = Vector2(-252, 42.999996)
+scale = Vector2(5.7916665, 3.9583335)
+texture = ExtResource("2_tmoxt")
+centered = false
+
+[node name="CaveLayer05" type="ParallaxLayer" parent="ParallaxBackground" unique_id=155964869]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.15, 0.03)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer05" unique_id=1456798605]
+position = Vector2(-148.00003, -56)
+scale = Vector2(5, 3.9629629)
+texture = ExtResource("3_r2fl4")
+centered = false
+
+[node name="CaveLayer04" type="ParallaxLayer" parent="ParallaxBackground" unique_id=711407713]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.25, 0.04)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer04" unique_id=1220195920]
+position = Vector2(-288.99997, -28)
+scale = Vector2(5.78125, 3.9398148)
+texture = ExtResource("4_s1jqf")
+centered = false
+
+[node name="CaveLayer03" type="ParallaxLayer" parent="ParallaxBackground" unique_id=970149993]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.35, 0.05)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer03" unique_id=1560112062]
+position = Vector2(-238, -6.999996)
+scale = Vector2(5.78125, 3.9675927)
+texture = ExtResource("5_rndxe")
+centered = false
+
+[node name="CaveLayer02" type="ParallaxLayer" parent="ParallaxBackground" unique_id=891770651]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.5, 0.07)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer02" unique_id=1510362334]
+position = Vector2(-302, 0)
+scale = Vector2(5.786458, 3.9675927)
+texture = ExtResource("6_rqluw")
+centered = false
+
+[node name="CaveLayer01" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1253325004]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.65, 0.1)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer01" unique_id=295328346]
+scale = Vector2(5, 3.976852)
+texture = ExtResource("7_rsdo6")
+centered = false
+
+[node name="World" type="Node2D" parent="." unique_id=767684852]
+
+[node name="GroundTiles" type="TileMapLayer" parent="World" unique_id=2032026836]
+tile_map_data = PackedByteArray("AAAnABEAAwACAAIAAAAoABEAAwACAAIAAAApABEAAwACAAIAAAAqABEAAwACAAIAAAArABEAAwACAAIAAAAsABEAAwACAAIAAAAtABEAAwACAAIAAAAuABEAAwACAAIAAAAvABEAAwACAAIAAAAwABEAAwACAAIAAAAxABEAAwACAAIAAAAyABEAAwACAAIAAAAzABEAAwACAAIAAAA0ABEAAwACAAIAAAA1ABEAAwACAAIAAAA2ABEAAwACAAIAAAA3ABEAAwACAAIAAAA4ABEAAwACAAIAAAA5ABEAAwACAAIAAAA6ABEAAwACAAIAAAA7ABEAAwACAAIAAAA8ABEAAwACAAIAAAA9ABEAAwACAAIAAAA+ABEAAwACAAIAAAA/ABEAAwACAAIAAABAABEAAwACAAIAAABBABEAAwACAAIAAABCABEAAwACAAIAAABDABEAAwACAAIAAABEABEAAwACAAIAAABFABEAAwACAAIAAABGABEAAwACAAIAAABHABEAAwACAAIAAABJABEAAwADAAIAAABIABEAAwADAAIAAABLABEAAwADAAIAAABKABEAAwADAAIAAABNABEAAwADAAIAAABMABEAAwADAAIAAABOABEAAwADAAIAAABPABEAAwADAAIAAABQABEAAwADAAIAAABRABEAAwADAAIAAABSABEAAwADAAIAAABTABEAAwADAAIAAAAnABAAAwACAAAAAAAoABAAAwACAAAAAAApABAAAwACAAAAAAAqABAAAwACAAAAAAArABAAAwACAAAAAAAsABAAAwACAAAAAAAtABAAAwACAAAAAAAuABAAAwACAAAAAAAvABAAAwACAAAAAAAwABAAAwACAAAAAAAxABAAAwACAAAAAAAyABAAAwACAAAAAAAzABAAAwACAAAAAAA0ABAAAwACAAAAAAA1ABAAAwACAAAAAAA2ABAAAwACAAAAAAA3ABAAAwACAAAAAAA4ABAAAwACAAAAAAA5ABAAAwACAAAAAAA6ABAAAwACAAAAAAA7ABAAAwACAAAAAAA8ABAAAwACAAAAAAA9ABAAAwACAAAAAAA+ABAAAwACAAAAAAA/ABAAAwACAAAAAABAABAAAwACAAAAAABBABAAAwACAAAAAABCABAAAwACAAAAAABDABAAAwACAAAAAABEABAAAwACAAAAAABFABAAAwACAAAAAABGABAAAwACAAAAAABHABAAAwACAAAAAABIABAAAwACAAAAAABJABAAAwACAAAAAABKABAAAwACAAAAAABLABAAAwACAAAAAABMABAAAwACAAAAAABNABAAAwACAAAAAABOABAAAwACAAAAAABPABAAAwACAAAAAABQABAAAwACAAAAAABRABAAAwACAAAAAABSABAAAwACAAAAAABTABAAAwACAAAAAAAnABIAAwACAAUAAAAoABIAAwACAAUAAAApABIAAwACAAUAAAAqABIAAwACAAUAAAArABIAAwACAAUAAAAsABIAAwACAAUAAAAtABIAAwACAAUAAAAuABIAAwACAAUAAAAvABIAAwACAAUAAAAwABIAAwACAAUAAAAxABIAAwACAAUAAAAzABIAAwACAAUAAAA0ABIAAwACAAUAAAA1ABIAAwACAAUAAAA2ABIAAwACAAUAAAA3ABIAAwACAAUAAAA4ABIAAwACAAUAAAA5ABIAAwACAAUAAAA6ABIAAwACAAUAAAA7ABIAAwACAAUAAAA8ABIAAwACAAUAAAA9ABIAAwACAAUAAAAyABIAAwACAAUAAAA+ABIAAwACAAUAAAA/ABIAAwACAAUAAABAABIAAwACAAUAAABBABIAAwACAAUAAABCABIAAwACAAUAAABDABIAAwACAAUAAABEABIAAwACAAUAAABFABIAAwACAAUAAABGABIAAwACAAUAAABHABIAAwACAAUAAABIABIAAwACAAUAAABJABIAAwACAAUAAABKABIAAwACAAUAAABLABIAAwACAAUAAABMABIAAwACAAUAAABNABIAAwACAAUAAABOABIAAwACAAUAAABPABIAAwACAAUAAABQABIAAwACAAUAAABRABIAAwACAAUAAABSABIAAwACAAUAAABTABIAAwACAAUAAAABABAAAwACAAAAAAACABAAAwACAAAAAAADABAAAwACAAAAAAAEABAAAwACAAAAAAAFABAAAwACAAAAAAAGABAAAwACAAAAAAAHABAAAwACAAAAAAAIABAAAwACAAAAAAAJABAAAwACAAAAAAAKABAAAwACAAAAAAALABAAAwACAAAAAAAMABAAAwACAAAAAAANABAAAwACAAAAAAAOABAAAwACAAAAAAAPABAAAwACAAAAAAABABIAAwACAAUAAAACABIAAwACAAUAAAADABIAAwACAAUAAAAEABIAAwACAAUAAAAFABIAAwACAAUAAAAGABIAAwACAAUAAAAHABIAAwACAAUAAAAIABIAAwACAAUAAAAJABIAAwACAAUAAAAKABIAAwACAAUAAAALABIAAwACAAUAAAAMABIAAwACAAUAAAANABIAAwACAAUAAAAOABIAAwACAAUAAAAPABIAAwACAAUAAAABABEAAwAAAAIAAAACABEAAwACAAIAAAADABEAAwACAAIAAAAEABEAAwACAAIAAAAFABEAAwACAAIAAAAGABEAAwACAAIAAAAHABEAAwACAAIAAAAIABEAAwACAAIAAAAJABEAAwACAAIAAAAKABEAAwACAAIAAAALABEAAwACAAIAAAAMABEAAwACAAIAAAANABEAAwACAAIAAAAOABEAAwACAAIAAAAPABEAAwAFAAIAAAA=")
+tile_set = SubResource("TileSet_jmes4")
+
+[node name="TrapBlock" type="Area2D" parent="World" unique_id=1392216005]
+position = Vector2(650, 210)
+script = ExtResource("12_tclt5")
+
+[node name="ColorRect" type="ColorRect" parent="World/TrapBlock" unique_id=1528508259]
+visible = false
+offset_left = -35.0
+offset_top = -55.0
+offset_right = 35.0
+offset_bottom = 55.0
+color = Color(0.9525886, 0.07267093, 0.06108553, 1)
+
+[node name="Markers" type="Node2D" parent="World" unique_id=1885258038]
+
+[node name="FinalDoorMarker" type="Marker2D" parent="World/Markers" unique_id=919020940]
+position = Vector2(1050, 435)
+
+[node name="ExitDoor" type="Area2D" parent="World" unique_id=2026676205]
+position = Vector2(1050, 435)
+script = ExtResource("15_0062h")
+
+[node name="Visual" type="ColorRect" parent="World/ExitDoor" unique_id=1869774844]
+visible = false
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = 45.0
+color = Color(0.8461248, 0.87464255, 0.9973914, 1)
+
+[node name="OpenRange" type="Area2D" parent="World/ExitDoor" unique_id=744021418]
+
+[node name="EndDeathBlock" type="Area2D" parent="World" unique_id=1449026605]
+position = Vector2(1021, 414)
+script = ExtResource("17_aeapf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/EndDeathBlock" unique_id=1814246766]
+position = Vector2(-301, -196)
+shape = SubResource("RectangleShape2D_jmes4")
+
+[node name="Visual" type="ColorRect" parent="World/EndDeathBlock" unique_id=949585934]
+visible = false
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = 45.0
+
+[node name="Sprite2D" type="Sprite2D" parent="World/EndDeathBlock" unique_id=1466580328]
+position = Vector2(-301, -197)
+texture = ExtResource("18_5yyxg")
+
+[node name="Decorations" type="Node2D" parent="World" unique_id=565888550]
+
+[node name="LightObjects" type="Node2D" parent="World" unique_id=1348536270]
+
+[node name="Lamp01" type="Sprite2D" parent="World/LightObjects" unique_id=2082571711]
+position = Vector2(61, 456.00003)
+scale = Vector2(3, 3)
+texture = ExtResource("20_gu5p2")
+
+[node name="PointLight2D" type="PointLight2D" parent="World/LightObjects/Lamp01" unique_id=1058194278]
+position = Vector2(141.33334, 3)
+scale = Vector2(0.09259258, 0.043981448)
+color = Color(1, 0.8352941, 0.54509807, 1)
+energy = 1.8
+texture = ExtResource("21_n33p4")
+texture_scale = 18.0
+script = ExtResource("22_g4exc")
+
+[node name="spike" type="Area2D" parent="World" unique_id=1391047197]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/spike" unique_id=680103212]
+position = Vector2(913, 238)
+shape = SubResource("RectangleShape2D_qdh5e")
+debug_color = Color(0.8593335, 0.19008526, 0.7618806, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/spike" unique_id=835825728]
+position = Vector2(913, 238)
+texture = ExtResource("18_5yyxg")
+
+[node name="spike2" type="Area2D" parent="World" unique_id=1866461412]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/spike2" unique_id=1225709076]
+position = Vector2(1070, 238)
+shape = SubResource("RectangleShape2D_qdh5e")
+debug_color = Color(0.8593335, 0.19008526, 0.7618806, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/spike2" unique_id=490572900]
+position = Vector2(1070, 238)
+texture = ExtResource("18_5yyxg")
+
+[node name="FalseFloor" type="AnimatableBody2D" parent="World" unique_id=180239002]
+position = Vector2(320, 500)
+script = ExtResource("17_68jev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor" unique_id=1831850095]
+position = Vector2(-8, 4)
+shape = SubResource("RectangleShape2D_37jkp")
+
+[node name="Visual" type="ColorRect" parent="World/FalseFloor" unique_id=1679420179]
+visible = false
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Detector" type="Area2D" parent="World/FalseFloor" unique_id=432297612]
+position = Vector2(279, -2)
+
+[node name="DetectorShape" type="CollisionShape2D" parent="World/FalseFloor/Detector" unique_id=727472678]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_ci1t6")
+
+[node name="FalseFloorTiles" type="TileMapLayer" parent="World/FalseFloor" unique_id=1873999736]
+position = Vector2(-32, -20)
+tile_map_data = PackedByteArray("AAAAAAIAAQABAAUAAAABAAIAAQACAAUAAAACAAIAAQADAAUAAAADAAIAAQAFAAUAAAD//wIAAQADAAUAAAD//wEAAQACAAMAAAADAAEAAQAFAAQAAAADAAAAAQAFAAEAAAD//wAAAQADAAAAAAAAAAAAAQABAAAAAAABAAAAAQACAAAAAAACAAAAAQADAAAAAAACAAEAAQAEAAIAAAAAAAEAAQACAAMAAAABAAEAAQACAAIAAAA=")
+tile_set = SubResource("TileSet_7hevf")
+
+[node name="Player" parent="." unique_id=574415046 instance=ExtResource("23_tlj46")]
+position = Vector2(106, 230)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1626238330]
+color = Color(0.42, 0.44, 0.5, 1)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=980039613]
+
+[node name="CompleteLabel" type="Label" parent="UI" unique_id=1099804597]
+visible = false
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 32
+text = "Tutorial concluído!"
+
+[node name="EndMenu" type="Control" parent="UI" unique_id=203539831]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RepeatTutorialButton" type="Button" parent="UI/EndMenu" unique_id=2006154426]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 260.0
+offset_bottom = 110.0
+text = "Repetir fase"
+
+[node name="NextPhaseButton" type="Button" parent="UI/EndMenu" unique_id=1992340978]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 260.0
+offset_bottom = 160.0
+text = "Próxima fase"
+
+[node name="QuitButton" type="Button" parent="UI/EndMenu" unique_id=1616151836]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 170.0
+offset_right = 260.0
+offset_bottom = 210.0
+text = "Fechar jogo"
+
+[node name="ReturnHintLabel" type="Label" parent="UI" unique_id=795231502]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "A porta era falsa... volte para o início!"
+
+[node name="DeathLabel" type="Label" parent="UI" unique_id=423780143]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -22.5
+offset_right = 104.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Você morreu."
+
+[node name="LevelManager" type="Node" parent="." unique_id=1096244592]
+script = ExtResource("24_uhtot")
+next_phase_scene_path = "res://scenes/levels/level_02.tscn"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1344292889]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1679303549]
+material = SubResource("CanvasItemMaterial_lswbx")
+position = Vector2(850.00006, 468)
+scale = Vector2(0.055338535, 0.05078122)
+texture = ExtResource("25_3jkbg")

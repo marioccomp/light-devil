@@ -17,9 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://dhqwirw62rx5d" path="res://assets/background/cave/2.png" id="9_lswbx"]
 [ext_resource type="Texture2D" uid="uid://ck55dw25g8e11" path="res://assets/dungeon/decorations/Skull 3.png" id="10_cwffn"]
 [ext_resource type="Texture2D" uid="uid://cekv3xb2o23d3" path="res://assets/background/cave/1.png" id="10_uujh0"]
-[ext_resource type="Texture2D" uid="uid://dvvkc0h05208c" path="res://assets/tiles/Tiles.png" id="11_svp4f"]
+[ext_resource type="Texture2D" uid="uid://dvvkc0h05208c" path="res://assets/Tiles.png" id="11_svp4f"]
 [ext_resource type="Texture2D" uid="uid://b3mxgp3lg0dwe" path="res://assets/dungeon/lights/Lamp 1.png" id="13_iu1m7"]
 [ext_resource type="Texture2D" uid="uid://bcclvr3cqna62" path="res://assets/dungeon/lights/Light 1.png" id="14_j6r3n"]
+[ext_resource type="Script" uid="uid://c06amtv108yqt" path="res://scripts/flickering_light_2d.gd" id="15_5q1oa"]
 [ext_resource type="Texture2D" uid="uid://cok808ubo4obo" path="res://assets/hazards/falling/boulder.png" id="15_w4kkx"]
 [ext_resource type="Texture2D" uid="uid://buq3s2mwalium" path="res://assets/hazards/traps/Pit_Trap_Spikes.png" id="18_svp4f"]
 [ext_resource type="Texture2D" uid="uid://c2tjesco78b10" path="res://assets/doors/cell_door_frames.png" id="18_w4kkx"]
@@ -144,9 +145,9 @@ size = Vector2(240, 48)
 size = Vector2(80, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0hvh"]
-size = Vector2(80, 10)
+size = Vector2(80, 22)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jmes4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mhiu8"]
 texture = ExtResource("4_ijn0p")
 0:0/0 = 0
 1:0/0 = 0
@@ -183,7 +184,7 @@ texture = ExtResource("4_ijn0p")
 3:5/0 = 0
 4:5/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_svp4f"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lswbx"]
 texture = ExtResource("11_svp4f")
 0:0/0 = 0
 1:0/0 = 0
@@ -255,8 +256,8 @@ texture = ExtResource("11_svp4f")
 11:5/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tyxjt"]
-sources/0 = SubResource("TileSetAtlasSource_jmes4")
-sources/1 = SubResource("TileSetAtlasSource_svp4f")
+sources/0 = SubResource("TileSetAtlasSource_mhiu8")
+sources/1 = SubResource("TileSetAtlasSource_lswbx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50wog"]
 size = Vector2(720, 48)
@@ -526,7 +527,7 @@ size = Vector2(40, 117.5)
 light_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhiu8"]
-size = Vector2(1256.8994, 494.4214)
+size = Vector2(1138.4479, 463.82635)
 
 [node name="Level_01" type="Node2D" unique_id=543101429]
 
@@ -538,7 +539,7 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveBackColor" unique_id=1086203116]
-position = Vector2(273.99997, 153)
+position = Vector2(665, 185.99998)
 scale = Vector2(5.776041, 3.9629629)
 texture = ExtResource("4_vrcmr")
 centered = false
@@ -549,7 +550,7 @@ motion_scale = Vector2(0.08, 0.02)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer06" unique_id=941871354]
-position = Vector2(-322, 11)
+position = Vector2(-321, 16.999998)
 scale = Vector2(5.7916665, 3.9583335)
 texture = ExtResource("5_svp4f")
 centered = false
@@ -560,6 +561,7 @@ motion_scale = Vector2(0.15, 0.03)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer05" unique_id=1456798605]
+position = Vector2(-72.000015, -40)
 scale = Vector2(5, 3.9629629)
 texture = ExtResource("6_1b0o8")
 centered = false
@@ -798,6 +800,7 @@ color = Color(1, 0.8352941, 0.54509807, 1)
 energy = 1.8
 texture = ExtResource("14_j6r3n")
 texture_scale = 18.0
+script = ExtResource("15_5q1oa")
 
 [node name="Player" parent="." unique_id=574415046 instance=ExtResource("2_2djvx")]
 position = Vector2(122, 456)
@@ -811,7 +814,7 @@ color = Color(0.42, 0.44, 0.5, 1)
 visible = false
 offset_left = 20.0
 offset_top = 20.0
-offset_right = 164.0
+offset_right = 320.0
 offset_bottom = 43.0
 theme_override_font_sizes/font_size = 32
 text = "Tutorial concluído!"
@@ -829,7 +832,7 @@ offset_left = 20.0
 offset_top = 70.0
 offset_right = 260.0
 offset_bottom = 110.0
-text = "Repetir tutorial"
+text = "Repetir fase"
 
 [node name="NextPhaseButton" type="Button" parent="UI/EndMenu" unique_id=1992340978]
 layout_mode = 0
@@ -877,19 +880,20 @@ text = "Você morreu."
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("7_1ey3t")
+next_phase_scene_path = "res://scenes/levels/level_02.tscn"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1344292889]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1679303549]
 material = SubResource("CanvasItemMaterial_lswbx")
-position = Vector2(834, 469.99997)
-scale = Vector2(0.03645831, 0.0390625)
+position = Vector2(850.00006, 468)
+scale = Vector2(0.055338535, 0.05078122)
 texture = ExtResource("24_w4kkx")
 
 [node name="Area2D" type="Area2D" parent="StaticBody2D/Sprite2D" unique_id=325723601]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Sprite2D/Area2D" unique_id=1081327035]
-position = Vector2(6.4277344, 53.964844)
+position = Vector2(9.03418, 153.14355)
 scale = Vector2(0.9999998, 1)
 shape = SubResource("RectangleShape2D_mhiu8")
 

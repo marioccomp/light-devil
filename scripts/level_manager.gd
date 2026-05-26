@@ -1,5 +1,6 @@
 extends Node
 
+@export_file("*.tscn") var next_phase_scene_path: String = ""
 @export var end_death_block_offset_x: float = 30.0
 @export var intro_camera_offset: Vector2 = Vector2(0, -90)
 @export var return_hint_time: float = 2.8
@@ -57,6 +58,7 @@ func _ready() -> void:
 	return_hint_label.visible = false
 	death_label.visible = false
 	end_menu.visible = false
+	next_phase_button.visible = not next_phase_scene_path.is_empty()
 
 	repeat_tutorial_button.pressed.connect(_on_repeat_tutorial_pressed)
 	next_phase_button.pressed.connect(_on_next_phase_pressed)
@@ -146,7 +148,7 @@ func complete_phase() -> void:
 	if game_camera.has_method("pulse_zoom"):
 		game_camera.pulse_zoom(Vector2(1.65, 1.65), 0.12, 0.25)
 
-	print("Tutorial concluído!")
+	print("Fase concluída!")
 
 func on_player_died(player_body: Node) -> void:
 	if player_died or phase_finished:
@@ -182,7 +184,11 @@ func _on_repeat_tutorial_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_next_phase_pressed() -> void:
-	print("Próxima fase ainda não foi implementada.")
+	if next_phase_scene_path.is_empty():
+		print("Próxima fase ainda não foi implementada.")
+		return
+
+	get_tree().change_scene_to_file(next_phase_scene_path)
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
