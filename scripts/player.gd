@@ -11,9 +11,13 @@ extends CharacterBody2D
 var input_locked := false
 var dead := false
 var controls_inverted := false
+var gravity_inverted := false
+var gravity_sign := 1.0
 
 
 func _ready() -> void:
+	up_direction = Vector2.UP
+
 	if visual != null:
 		visual.visible = false
 
@@ -48,13 +52,15 @@ func _physics_process(delta: float) -> void:
 		_set_facing_left(true)
 
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += gravity * gravity_sign * delta
 	else:
-		if velocity.y > 0:
+		if gravity_sign > 0.0 and velocity.y > 0:
+			velocity.y = 0
+		elif gravity_sign < 0.0 and velocity.y < 0:
 			velocity.y = 0
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_force
+		velocity.y = jump_force * gravity_sign
 
 	move_and_slide()
 
@@ -72,7 +78,7 @@ func _update_animation() -> void:
 		return
 
 	if not is_on_floor():
-		if velocity.y < 0:
+		if velocity.y * gravity_sign < 0:
 			_play_anim("jump")
 		else:
 			_play_anim("fall")
@@ -122,6 +128,17 @@ func set_controls_inverted(enabled: bool) -> void:
 	controls_inverted = enabled
 
 
+func set_gravity_inverted(enabled: bool) -> void:
+	gravity_inverted = enabled
+	gravity_sign = -1.0 if gravity_inverted else 1.0
+	up_direction = Vector2.DOWN if gravity_inverted else Vector2.UP
+
+	if anim != null:
+		anim.scale.y = -absf(anim.scale.y) if gravity_inverted else absf(anim.scale.y)
+
+	velocity.y = 0
+
+
 func die() -> void:
 	if dead:
 		return
@@ -148,6 +165,7 @@ func respawn_at(new_position: Vector2) -> void:
 	dead = false
 	input_locked = false
 	controls_inverted = false
+	set_gravity_inverted(false)
 	_play_anim("idle")
 
 

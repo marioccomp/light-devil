@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="4_trap_block"]
 [ext_resource type="Script" uid="uid://cutr5lrhap1ng" path="res://scripts/trap_trigger.gd" id="5_trap_trigger"]
 [ext_resource type="Texture2D" uid="uid://cok808ubo4obo" path="res://assets/hazards/falling/boulder.png" id="6_boulder"]
+[ext_resource type="Script" uid="uid://rniybenbnf3e" path="res://scripts/gravity_portal.gd" id="7_gravity_portal"]
+[ext_resource type="Script" uid="uid://doa5elu8n3ep5" path="res://scripts/gravity_inverter_floor.gd" id="8_gravity_inverter_floor"]
+[ext_resource type="Script" uid="uid://b7gjvvinxwadw" path="res://scripts/finish_level_door.gd" id="9_finish_level_door"]
+[ext_resource type="Script" uid="uid://4k7o0facxalq" path="res://scripts/death_zone.gd" id="10_death_zone"]
+[ext_resource type="Texture2D" uid="uid://b6o6se34wnkxx" path="res://assets/dungeon/hazards/armadilha2.png" id="12_hidden_spike_style"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
 size = Vector2(561.5, 61)
@@ -17,7 +22,7 @@ size = Vector2(35.124992, 64)
 size = Vector2(105.5, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3l5x"]
-size = Vector2(61.75, 141)
+size = Vector2(79.875, 141)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq1pa"]
 size = Vector2(72.49997, 64)
@@ -126,6 +131,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trap_trigger"]
 size = Vector2(40, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(54, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gravity_floor"]
+size = Vector2(561.5, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gravity_floor_zone"]
+size = Vector2(561.5, 96)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hidden_spike"]
+light_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hidden_spike_style"]
+size = Vector2(1138.4479, 463.82635)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_finish_door"]
+size = Vector2(56, 96)
+
 [node name="Level02" type="Node2D" unique_id=1011825014]
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1183913745]
@@ -162,7 +185,7 @@ position = Vector2(199.25, -92)
 shape = SubResource("RectangleShape2D_inverted_zone")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor2/InvertedControlsZone" unique_id=676929401]
-position = Vector2(218, -157.5)
+position = Vector2(208.9375, -157.5)
 shape = SubResource("RectangleShape2D_a3l5x")
 
 [node name="Floor3" type="StaticBody2D" parent="." unique_id=553132813]
@@ -222,6 +245,124 @@ trap_block_path = NodePath("../TrapBlock")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerFloor4" unique_id=561668108]
 shape = SubResource("RectangleShape2D_trap_trigger")
+
+[node name="GravityPortalEntry" type="Area2D" parent="." unique_id=1333169720]
+position = Vector2(1080, 279)
+script = ExtResource("7_gravity_portal")
+target_marker_path = NodePath("../GravityPortalExit/SpawnPoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityPortalEntry" unique_id=578988819]
+shape = SubResource("RectangleShape2D_portal")
+
+[node name="Visual" type="Polygon2D" parent="GravityPortalEntry" unique_id=748782420]
+z_index = 20
+color = Color(0.197, 0.78, 1, 0.72)
+polygon = PackedVector2Array(0, -60, 23, -42, 27, 0, 23, 42, 0, 60, -23, 42, -27, 0, -23, -42)
+
+[node name="Core" type="Polygon2D" parent="GravityPortalEntry" unique_id=259474068]
+z_index = 21
+color = Color(0.86, 0.98, 1, 0.9)
+polygon = PackedVector2Array(0, -39, 14, -27, 17, 0, 14, 27, 0, 39, -14, 27, -17, 0, -14, -27)
+
+[node name="GravityPortalExit" type="Area2D" parent="." unique_id=1715734860]
+position = Vector2(281, 136)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityPortalExit" unique_id=1022909706]
+position = Vector2(-212, -10)
+shape = SubResource("RectangleShape2D_portal")
+
+[node name="Visual" type="Polygon2D" parent="GravityPortalExit" unique_id=660954892]
+z_index = 20
+position = Vector2(-210, -12)
+color = Color(1, 0.52, 0.22, 0.72)
+polygon = PackedVector2Array(0, -60, 23, -42, 27, 0, 23, 42, 0, 60, -23, 42, -27, 0, -23, -42)
+
+[node name="Core" type="Polygon2D" parent="GravityPortalExit" unique_id=370686087]
+z_index = 21
+position = Vector2(-212, -6)
+color = Color(1, 0.92, 0.78, 0.9)
+polygon = PackedVector2Array(0, -39, 14, -27, 17, 0, 14, 27, 0, 39, -14, 27, -17, 0, -14, -27)
+
+[node name="SpawnPoint" type="Marker2D" parent="GravityPortalExit" unique_id=217640332]
+position = Vector2(-212, -6)
+
+[node name="GravityInverterFloor" type="StaticBody2D" parent="." unique_id=1640318265]
+position = Vector2(281, 101)
+
+[node name="Visual" type="Sprite2D" parent="GravityInverterFloor" unique_id=218870265]
+modulate = Color(0.62, 0.86, 1, 1)
+position = Vector2(2, -37)
+scale = Vector2(5.8854175, 0.6562504)
+texture = ExtResource("2_floor_texture")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityInverterFloor" unique_id=992723111]
+position = Vector2(0, -38)
+shape = SubResource("RectangleShape2D_gravity_floor")
+
+[node name="GravityZone" type="Area2D" parent="GravityInverterFloor" unique_id=1795238925]
+script = ExtResource("8_gravity_inverter_floor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityInverterFloor/GravityZone" unique_id=133733379]
+position = Vector2(1, -52)
+shape = SubResource("RectangleShape2D_gravity_floor_zone")
+
+[node name="HiddenSpike" type="StaticBody2D" parent="GravityInverterFloor" unique_id=1047938962]
+position = Vector2(90, -35)
+
+[node name="Sprite2D" type="Sprite2D" parent="GravityInverterFloor/HiddenSpike" unique_id=1727318367]
+material = SubResource("CanvasItemMaterial_hidden_spike")
+scale = Vector2(0.055338535, -0.05078122)
+texture = ExtResource("12_hidden_spike_style")
+offset = Vector2(0, -848)
+
+[node name="Area2D" type="Area2D" parent="GravityInverterFloor/HiddenSpike/Sprite2D" unique_id=68037636]
+script = ExtResource("10_death_zone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityInverterFloor/HiddenSpike/Sprite2D/Area2D" unique_id=2001144541]
+position = Vector2(54.211754, -827.07733)
+scale = Vector2(0.9999998, 1)
+shape = SubResource("RectangleShape2D_hidden_spike_style")
+
+[node name="FinishDoor" type="Area2D" parent="." unique_id=767239665]
+position = Vector2(539, 146)
+script = ExtResource("9_finish_level_door")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishDoor" unique_id=1275639496]
+shape = SubResource("RectangleShape2D_finish_door")
+
+[node name="Visual" type="ColorRect" parent="FinishDoor" unique_id=1650275973]
+offset_left = -28.0
+offset_top = -48.0
+offset_right = 28.0
+offset_bottom = 48.0
+color = Color(0.18, 0.82, 0.58, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Top" type="ColorRect" parent="FinishDoor" unique_id=890851277]
+offset_left = -36.0
+offset_top = -54.0
+offset_right = 36.0
+offset_bottom = -42.0
+color = Color(0.08, 0.34, 0.27, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Knob" type="ColorRect" parent="FinishDoor" unique_id=1108975136]
+offset_left = 14.0
+offset_top = -2.0
+offset_right = 22.0
+offset_bottom = 6.0
+color = Color(0.95, 0.88, 0.34, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="FinishLabel" type="Label" parent="." unique_id=1810537026]
+visible = false
+offset_left = 258.0
+offset_top = 130.0
+offset_right = 258.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 32
+text = "Fase concluída"
 
 [node name="Player" parent="." unique_id=544954080 instance=ExtResource("1_player")]
 position = Vector2(160, 456)
