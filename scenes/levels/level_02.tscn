@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://bbeehpl4pec0e"]
+
+[ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://b1c55na37klcj" path="res://assets/dungeon/tiles/Black Grey Bricks ReOrganized.png" id="2_floor_texture"]
+[ext_resource type="Script" uid="uid://bt1c5ldaxil7e" path="res://scripts/inverted_controls_zone.gd" id="3_inverted_zone"]
+[ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="4_trap_block"]
+[ext_resource type="Script" uid="uid://cutr5lrhap1ng" path="res://scripts/trap_trigger.gd" id="5_trap_trigger"]
+[ext_resource type="Texture2D" uid="uid://cok808ubo4obo" path="res://assets/hazards/falling/boulder.png" id="6_boulder"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(561.5, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5o3r"]
+size = Vector2(35.124992, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inverted_zone"]
+size = Vector2(105.5, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3l5x"]
+size = Vector2(61.75, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq1pa"]
+size = Vector2(72.49997, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor4"]
+size = Vector2(223, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trap_block"]
+radius = 47.010635
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_trap"]
+light_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_0"]
+atlas = ExtResource("6_boulder")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_1"]
+atlas = ExtResource("6_boulder")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_2"]
+atlas = ExtResource("6_boulder")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_3"]
+atlas = ExtResource("6_boulder")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_4"]
+atlas = ExtResource("6_boulder")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_5"]
+atlas = ExtResource("6_boulder")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_6"]
+atlas = ExtResource("6_boulder")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_7"]
+atlas = ExtResource("6_boulder")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_8"]
+atlas = ExtResource("6_boulder")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_9"]
+atlas = ExtResource("6_boulder")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_10"]
+atlas = ExtResource("6_boulder")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boulder_11"]
+atlas = ExtResource("6_boulder")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boulder_roll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boulder_11")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trap_trigger"]
+size = Vector2(40, 120)
+
+[node name="Level02" type="Node2D" unique_id=1011825014]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1183913745]
+position = Vector2(640, 520)
+
+[node name="Visual" type="Sprite2D" parent="Floor" unique_id=963171836]
+position = Vector2(-357.5, -16.49998)
+scale = Vector2(5.8854175, 0.6562504)
+texture = ExtResource("2_floor_texture")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=690061438]
+position = Vector2(-359.75, -17.5)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Floor2" type="StaticBody2D" parent="." unique_id=433380844]
+position = Vector2(640, 520)
+
+[node name="Visual" type="Sprite2D" parent="Floor2" unique_id=1362245548]
+position = Vector2(167.99994, -101.49997)
+scale = Vector2(0.3749995, 0.6562504)
+texture = ExtResource("2_floor_texture")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2" unique_id=1179604831]
+position = Vector2(167.4375, -103)
+shape = SubResource("RectangleShape2D_c5o3r")
+
+[node name="InvertedControlsZone" type="Area2D" parent="Floor2" unique_id=1800483384]
+script = ExtResource("3_inverted_zone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2/InvertedControlsZone" unique_id=1558028817]
+position = Vector2(199.25, -92)
+shape = SubResource("RectangleShape2D_inverted_zone")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor2/InvertedControlsZone" unique_id=676929401]
+position = Vector2(218, -157.5)
+shape = SubResource("RectangleShape2D_a3l5x")
+
+[node name="Floor3" type="StaticBody2D" parent="." unique_id=553132813]
+position = Vector2(640, 520)
+
+[node name="Visual" type="Sprite2D" parent="Floor3" unique_id=406681538]
+position = Vector2(2.5000153, -53.49997)
+scale = Vector2(0.78125066, 0.6562504)
+texture = ExtResource("2_floor_texture")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3" unique_id=2087597926]
+position = Vector2(1.75, -50.49997)
+shape = SubResource("RectangleShape2D_vq1pa")
+
+[node name="Floor4" type="StaticBody2D" parent="." unique_id=1791642727]
+position = Vector2(640, 520)
+
+[node name="Visual" type="Sprite2D" parent="Floor4" unique_id=1893625030]
+position = Vector2(361, -150)
+scale = Vector2(2.3125002, 0.6562504)
+texture = ExtResource("2_floor_texture")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4" unique_id=658922436]
+position = Vector2(361.5, -149)
+shape = SubResource("RectangleShape2D_floor4")
+
+[node name="TrapBlock" type="Area2D" parent="." unique_id=1969181524]
+position = Vector2(1001, 121)
+script = ExtResource("4_trap_block")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapBlock" unique_id=1460551090]
+position = Vector2(-4, -29)
+shape = SubResource("CircleShape2D_trap_block")
+
+[node name="ColorRect" type="ColorRect" parent="TrapBlock" unique_id=889904196]
+visible = false
+offset_left = -35.0
+offset_top = -55.0
+offset_right = 35.0
+offset_bottom = 55.0
+color = Color(0.9525886, 0.07267093, 0.06108553, 1)
+
+[node name="TrapSprite" type="AnimatedSprite2D" parent="TrapBlock" unique_id=1267829479]
+z_index = 5
+material = SubResource("CanvasItemMaterial_trap")
+position = Vector2(-5, -30)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_boulder_roll")
+animation = &"roll"
+
+[node name="TriggerFloor4" type="Area2D" parent="." unique_id=1810602393]
+position = Vector2(1001, 308)
+script = ExtResource("5_trap_trigger")
+trap_block_path = NodePath("../TrapBlock")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerFloor4" unique_id=561668108]
+shape = SubResource("RectangleShape2D_trap_trigger")
+
+[node name="Player" parent="." unique_id=544954080 instance=ExtResource("1_player")]
+position = Vector2(160, 456)

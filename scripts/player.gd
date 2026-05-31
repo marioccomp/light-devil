@@ -10,6 +10,7 @@ extends CharacterBody2D
 
 var input_locked := false
 var dead := false
+var controls_inverted := false
 
 
 func _ready() -> void:
@@ -36,6 +37,8 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var direction := Input.get_axis("move_left", "move_right")
+	if controls_inverted:
+		direction *= -1.0
 
 	velocity.x = direction * speed
 
@@ -115,6 +118,10 @@ func unlock_movement() -> void:
 	input_locked = false
 
 
+func set_controls_inverted(enabled: bool) -> void:
+	controls_inverted = enabled
+
+
 func die() -> void:
 	if dead:
 		return
@@ -140,6 +147,7 @@ func respawn_at(new_position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	dead = false
 	input_locked = false
+	controls_inverted = false
 	_play_anim("idle")
 
 
