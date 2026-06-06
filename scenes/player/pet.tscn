@@ -53,6 +53,8 @@ gradient = SubResource("Gradient_l80j0")
 
 [node name="Pet" type="Node2D" unique_id=74590169]
 script = ExtResource("1_5m9vb")
+weak_light_energy_multiplier = 0.14
+weak_light_radius_multiplier = 0.22
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1897646128]
 position = Vector2(0, -8)

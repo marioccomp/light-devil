@@ -2,11 +2,11 @@ extends Area2D
 
 @export var fall_speed: float = 520.0
 @export var active_time: float = 1.4
+@export var fall_direction: Vector2 = Vector2.DOWN
 
 @export var animation_name: String = "roll"
 @export var animation_fps: float = 12.0
 
-# Deixa false primeiro. Se quiser reforçar a sensação de rotação, liga no Inspector.
 @export var rotate_sprite_while_falling: bool = false
 @export var rotation_speed: float = 8.0
 
@@ -31,7 +31,8 @@ func _physics_process(delta: float) -> void:
 	if not falling:
 		return
 
-	global_position.y += fall_speed * delta
+	var direction := fall_direction.normalized()
+	global_position += direction * fall_speed * delta
 
 	if rotate_sprite_while_falling and trap_sprite != null:
 		trap_sprite.rotation += rotation_speed * delta

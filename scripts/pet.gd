@@ -8,6 +8,7 @@ const PET_RECOLOR_SHADER: Shader = preload("res://shaders/pet_recolor.gdshader")
 @export var follow_speed := 8.0
 @export var bob_amount := 5.0
 @export var bob_speed := 4.5
+
 @export var light_energy := 2.45
 @export var use_generated_gradient_texture := true
 @export var use_native_light_texture_size := true
@@ -15,16 +16,25 @@ const PET_RECOLOR_SHADER: Shader = preload("res://shaders/pet_recolor.gdshader")
 @export var light_radius_pixels := 226.0
 @export var light_flicker_strength := 0.12
 @export var light_flicker_speed := 3.2
+
 @export var light_color := Color(0.57254905, 0.88235295, 1.0, 1.0)
 @export var color_a := Color(0.145, 0.8, 1.0, 1.0)
 @export var color_b := Color(0.916, 0.512, 0.165, 1.0)
 @export var color_cycle_speed := 1.2
+
 @export var gradient_texture_size := Vector2i(400, 400)
 @export var gradient_core_color := Color(1.0, 0.98, 0.92, 1.0)
+
 @export_range(0.0, 1.0, 0.01) var gradient_core_stop := 0.0
 @export_range(0.0, 1.0, 0.01) var gradient_mid_stop := 0.28
 @export_range(0.0, 1.0, 0.01) var gradient_outer_stop := 0.74
 @export_range(0.0, 1.0, 0.01) var gradient_mid_alpha := 0.4
+
+@export_group("Light Power Gameplay")
+@export_range(0.0, 1.0, 0.01) var light_power := 1.0
+@export_range(0.0, 1.0, 0.01) var weak_light_energy_multiplier := 0.25
+@export_range(0.0, 1.0, 0.01) var weak_light_radius_multiplier := 0.45
+@export var weak_light_color := Color(0.22, 0.38, 0.62, 1.0)
 
 @onready var pet_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pet_light: PointLight2D = $PointLight2D
@@ -51,6 +61,7 @@ func _ready() -> void:
 				gradient_outer_stop,
 				gradient_mid_alpha
 			)
+
 		pet_light.enabled = true
 		pet_light.offset = Vector2.ZERO
 		pet_light.energy = light_energy
@@ -75,7 +86,9 @@ func _process(delta: float) -> void:
 		offset = offset_when_player_faces_right
 
 	var time: float = Time.get_ticks_msec() / 1000.0
-	var animated_light_color: Color = _get_animated_light_color(time)
+	var base_light_color: Color = _get_animated_light_color(time)
+	var powered_light_color: Color = weak_light_color.lerp(base_light_color, light_power)
+
 	var floating: Vector2 = Vector2(0.0, sin(time * bob_speed) * bob_amount)
 
 	var target_position: Vector2 = player.global_position + offset + floating
@@ -88,11 +101,35 @@ func _process(delta: float) -> void:
 	if pet_light != null:
 		var flicker: float = 1.0 + sin(time * light_flicker_speed) * light_flicker_strength
 		flicker += sin(time * (light_flicker_speed * 1.91)) * (light_flicker_strength * 0.5)
-		pet_light.energy = maxf(light_energy * flicker, 0.0)
-		pet_light.texture_scale = _get_light_texture_scale() * (1.0 + (flicker - 1.0) * 0.08)
-		pet_light.color = animated_light_color
 
-	_apply_pet_color(animated_light_color)
+		var energy_multiplier: float = lerpf(weak_light_energy_multiplier, 1.0, light_power)
+		var radius_multiplier: float = lerpf(weak_light_radius_multiplier, 1.0, light_power)
+
+		pet_light.energy = maxf(light_energy * energy_multiplier * flicker, 0.0)
+		pet_light.texture_scale = _get_light_texture_scale() * radius_multiplier * (1.0 + (flicker - 1.0) * 0.08)
+		pet_light.color = powered_light_color
+
+	_apply_pet_color(powered_light_color)
+
+
+func set_light_power(value: float) -> void:
+	light_power = clampf(value, 0.0, 1.0)
+
+
+func get_light_power() -> float:
+	return light_power
+
+
+func drain_light(amount: float, minimum_power: float = 0.0) -> void:
+	set_light_power(maxf(light_power - amount, minimum_power))
+
+
+func recharge_light(amount: float = 1.0) -> void:
+	set_light_power(light_power + amount)
+
+
+func is_light_strong(threshold: float = 0.65) -> bool:
+	return light_power >= threshold
 
 
 func _get_light_texture_scale() -> float:
@@ -109,6 +146,7 @@ func _get_light_texture_scale() -> float:
 		return 1.0
 
 	return (light_radius_pixels * 2.0) / texture_diameter
+
 
 func _get_animated_light_color(time: float) -> Color:
 	var color_mix: float = (sin(time * color_cycle_speed) + 1.0) * 0.5
