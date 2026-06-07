@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var jump_force: float = -430.0
 @export var gravity: float = 1200.0
 @export var death_delay: float = 0.85
+@export var normal_sprite_position: Vector2 = Vector2(0, -18)
+@export var inverted_sprite_position: Vector2 = Vector2(0, 1)
 
 @onready var anim: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
@@ -134,16 +136,24 @@ func set_gravity_inverted(enabled: bool) -> void:
 	up_direction = Vector2.DOWN if gravity_inverted else Vector2.UP
 
 	if anim != null:
-		anim.scale.y = -absf(anim.scale.y) if gravity_inverted else absf(anim.scale.y)
+		if gravity_inverted:
+			anim.scale.y = -absf(anim.scale.y)
+			anim.position = inverted_sprite_position
+		else:
+			anim.scale.y = absf(anim.scale.y)
+			anim.position = normal_sprite_position
 
 	velocity.y = 0
 
+func is_gravity_inverted() -> bool:
+	return gravity_inverted
 
 func die() -> void:
 	if dead:
 		return
 
 	dead = true
+	_prepare_rune_death_hint()
 	input_locked = true
 	velocity = Vector2.ZERO
 
@@ -174,3 +184,18 @@ func force_fall() -> void:
 		return
 
 	velocity.y = max(velocity.y, 420.0)
+	
+func _prepare_rune_death_hint() -> void:
+	var hint_until_msec := int(get_tree().get_meta("control_rune_tip_until_msec", 0))
+
+	if hint_until_msec <= 0:
+		return
+
+	if Time.get_ticks_msec() <= hint_until_msec:
+		get_tree().set_meta(
+			"pending_death_hint",
+			"Cuidado, runas invertem seus controles"
+		)
+
+	if get_tree().has_meta("control_rune_tip_until_msec"):
+		get_tree().remove_meta("control_rune_tip_until_msec")

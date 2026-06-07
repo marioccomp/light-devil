@@ -2,8 +2,12 @@ extends Area2D
 
 @export var invert_controls: bool = true
 @export var one_shot: bool = true
-@export var lock_time: float = 0.18
-@export var push_player_pixels: float = 55.0
+@export var death_hint_window_seconds: float = 7.0
+
+@export var effect_time: float = 0.12
+@export var fade_after_use: bool = true
+
+@export var push_player_pixels: float = 0.0
 @export var push_direction: Vector2 = Vector2.RIGHT
 
 @onready var visual: Node2D = get_node_or_null("Visual") as Node2D
@@ -29,46 +33,69 @@ func _on_body_entered(body: Node2D) -> void:
 	busy = true
 	used = true
 
-	if body.has_method("lock_movement"):
-		body.lock_movement()
+	# Troca o controle imediatamente, sem travar o jogador.
+	body.set_controls_inverted(invert_controls)
+	
+	if invert_controls:
+		var hint_until_msec := Time.get_ticks_msec() + int(death_hint_window_seconds * 1000.0)
+		get_tree().set_meta("control_rune_tip_until_msec", hint_until_msec)
+	else:
+		if get_tree().has_meta("control_rune_tip_until_msec"):
+			get_tree().remove_meta("control_rune_tip_until_msec")
 
-	if body is CharacterBody2D:
-		body.velocity = Vector2.ZERO
+	# Pequeno empurrão opcional. Recomendo deixar 0.
+	if push_player_pixels > 0.0:
+		body.global_position += push_direction.normalized() * push_player_pixels
 
 	var camera := get_tree().get_first_node_in_group("game_camera")
+
 	if camera != null:
 		if camera.has_method("pulse_zoom"):
-			camera.pulse_zoom(Vector2(1.45, 1.45), 0.07, 0.16)
+			camera.pulse_zoom(Vector2(1.25, 1.25), 0.05, 0.10)
 
 		if camera.has_method("shake"):
-			camera.shake(0.10, 3.0)
+			camera.shake(0.06, 2.0)
 
 	await _play_activation_effect()
 
-	body.set_controls_inverted(invert_controls)
-
-	body.global_position += push_direction.normalized() * push_player_pixels
-
-	await get_tree().create_timer(lock_time).timeout
-
-	if body.has_method("unlock_movement"):
-		body.unlock_movement()
-
-	if visual != null and one_shot:
-		visual.modulate.a = 0.45
+	if visual != null and one_shot and fade_after_use:
+		visual.modulate.a = 0.38
 
 	busy = false
 
 
 func _play_activation_effect() -> void:
 	if visual == null:
-		await get_tree().create_timer(0.12).timeout
+		await get_tree().create_timer(effect_time).timeout
 		return
 
 	var original_scale: Vector2 = visual.scale
-	var tween: Tween = create_tween()
 
-	tween.tween_property(visual, "scale", original_scale * 1.35, 0.08)
-	tween.tween_property(visual, "scale", original_scale, 0.10)
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		visual,
+		"scale",
+		original_scale * 1.22,
+		effect_time * 0.5
+	)
+
+	tween.tween_property(
+		visual,
+		"modulate:a",
+		1.0,
+		effect_time * 0.5
+	)
 
 	await tween.finished
+
+	var tween_back := create_tween()
+	tween_back.tween_property(
+		visual,
+		"scale",
+		original_scale,
+		effect_time * 0.5
+	)
+
+	await tween_back.finished

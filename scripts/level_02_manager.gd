@@ -4,6 +4,7 @@ extends Node
 @export var death_reload_delay: float = 1.35
 @export var play_intro_camera: bool = true
 @export var intro_camera_offset: Vector2 = Vector2(650, -90)
+@onready var rune_hint_label: Label = get_tree().current_scene.get_node_or_null("UI/RuneHintLabel") as Label
 
 @onready var player: CharacterBody2D = $"../Player"
 @onready var game_camera: Camera2D = $"../Player/Camera2D"
@@ -30,6 +31,7 @@ var death_messages := [
 
 
 func _ready() -> void:
+	call_deferred("_show_pending_death_hint")
 	randomize()
 
 	complete_label.visible = false
@@ -55,9 +57,15 @@ func _start_level() -> void:
 	if player_died or phase_finished:
 		return
 
-	if play_intro_camera and game_camera != null and game_camera.has_method("play_intro_pan"):
-		var target_position := player.global_position + intro_camera_offset
-		await game_camera.play_intro_pan(target_position)
+	var intro_key := "level_02_intro_already_played"
+	var should_play_intro := play_intro_camera and not get_tree().has_meta(intro_key)
+
+	if should_play_intro:
+		get_tree().set_meta(intro_key, true)
+
+		if game_camera != null and game_camera.has_method("play_intro_pan"):
+			var target_position := player.global_position + intro_camera_offset
+			await game_camera.play_intro_pan(target_position)
 
 	if player.has_method("unlock_movement"):
 		player.unlock_movement()
@@ -126,3 +134,37 @@ func _on_next_phase_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+	
+func _show_pending_death_hint() -> void:
+	await get_tree().process_frame
+
+	var hint_text := str(get_tree().get_meta("pending_death_hint", ""))
+
+	if hint_text == "":
+		return
+
+	get_tree().remove_meta("pending_death_hint")
+
+	if rune_hint_label == null:
+		return
+
+	rune_hint_label.text = hint_text
+	rune_hint_label.visible = true
+	rune_hint_label.modulate.a = 0.0
+
+	var tween_in := create_tween()
+	tween_in.tween_property(rune_hint_label, "modulate:a", 1.0, 0.20)
+
+	await tween_in.finished
+	await get_tree().create_timer(3.0).timeout
+
+	if rune_hint_label == null:
+		return
+
+	var tween_out := create_tween()
+	tween_out.tween_property(rune_hint_label, "modulate:a", 0.0, 0.25)
+
+	await tween_out.finished
+
+	if rune_hint_label != null:
+		rune_hint_label.visible = false

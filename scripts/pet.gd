@@ -4,6 +4,8 @@ const PET_RECOLOR_SHADER: Shader = preload("res://shaders/pet_recolor.gdshader")
 
 @export var offset_when_player_faces_right := Vector2(-45, -42)
 @export var offset_when_player_faces_left := Vector2(45, -42)
+@export var inverted_offset_when_player_faces_right := Vector2(-45, 42)
+@export var inverted_offset_when_player_faces_left := Vector2(45, 42)
 
 @export var follow_speed := 8.0
 @export var bob_amount := 5.0
@@ -80,10 +82,21 @@ func _process(delta: float) -> void:
 
 	var player_sprite: AnimatedSprite2D = player.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 
+	var gravity_inverted := false
+
+	if player.has_method("is_gravity_inverted"):
+		gravity_inverted = player.is_gravity_inverted()
+
 	var offset: Vector2 = offset_when_player_faces_left
 
+	if gravity_inverted:
+		offset = inverted_offset_when_player_faces_left
+
 	if player_sprite != null and player_sprite.flip_h:
-		offset = offset_when_player_faces_right
+		if gravity_inverted:
+			offset = inverted_offset_when_player_faces_right
+		else:
+			offset = offset_when_player_faces_right
 
 	var time: float = Time.get_ticks_msec() / 1000.0
 	var base_light_color: Color = _get_animated_light_color(time)
