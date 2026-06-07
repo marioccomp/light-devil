@@ -11,9 +11,18 @@ extends Area2D
 var used := false
 var busy := false
 
+var original_visual_scale: Vector2 = Vector2.ONE
+var original_light_energy: float = 1.4
+
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+
+	if visual != null:
+		original_visual_scale = visual.scale
+
+	if crystal_light != null:
+		original_light_energy = crystal_light.energy
 
 
 func _on_body_entered(body: Node) -> void:
@@ -67,11 +76,11 @@ func respawn() -> void:
 	if visual != null:
 		visual.visible = true
 		visual.modulate.a = 1.0
-		visual.scale = Vector2.ONE * 3.0
+		visual.scale = original_visual_scale
 
 	if crystal_light != null:
 		crystal_light.enabled = true
-		crystal_light.energy = 1.4
+		crystal_light.energy = original_light_energy
 
 
 func is_available() -> bool:
@@ -96,16 +105,16 @@ func _play_collect_effect() -> void:
 		await get_tree().create_timer(0.10).timeout
 		return
 
-	var original_scale: Vector2 = visual.scale
-	var original_light_energy: float = 0.0
+	var current_scale: Vector2 = visual.scale
+	var current_light_energy: float = 0.0
 
 	if crystal_light != null:
-		original_light_energy = crystal_light.energy
+		current_light_energy = crystal_light.energy
 
 	var tween := create_tween()
 	tween.set_parallel(true)
 
-	tween.tween_property(visual, "scale", original_scale * 1.45, 0.10)
+	tween.tween_property(visual, "scale", current_scale * 1.45, 0.10)
 
 	if crystal_light != null:
 		tween.tween_property(crystal_light, "energy", pulse_light_energy, 0.10)
@@ -115,9 +124,9 @@ func _play_collect_effect() -> void:
 	var tween_back := create_tween()
 	tween_back.set_parallel(true)
 
-	tween_back.tween_property(visual, "scale", original_scale, 0.14)
+	tween_back.tween_property(visual, "scale", current_scale, 0.14)
 
 	if crystal_light != null:
-		tween_back.tween_property(crystal_light, "energy", original_light_energy, 0.14)
+		tween_back.tween_property(crystal_light, "energy", current_light_energy, 0.14)
 
 	await tween_back.finished

@@ -11,6 +11,7 @@ extends Area2D
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
 @onready var door_sprite: AnimatedSprite2D = get_node_or_null("DoorSprite") as AnimatedSprite2D
 @onready var open_range: Area2D = get_node_or_null("OpenRange") as Area2D
+@onready var enter_marker: Marker2D = get_node_or_null("EnterMarker") as Marker2D
 
 var final_animation_running := false
 var player_in_open_range := false
@@ -120,16 +121,23 @@ func _move_player_to_door(player: Node) -> void:
 	if player == null:
 		return
 
+	var target_position: Vector2 = global_position
+
+	if enter_marker != null:
+		target_position = enter_marker.global_position
+
+	if player is CharacterBody2D:
+		(player as CharacterBody2D).velocity = Vector2.ZERO
+
 	var tween := create_tween()
 	tween.tween_property(
 		player,
-		"global_position:x",
-		global_position.x,
+		"global_position",
+		target_position,
 		approach_duration
-	)
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	await tween.finished
-
 
 func _blink_and_hide_player_and_pet(player: Node) -> void:
 	var pet := player.get_node_or_null("Pet")

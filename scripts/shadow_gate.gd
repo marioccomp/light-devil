@@ -12,7 +12,7 @@ extends StaticBody2D
 
 @onready var sensor: Area2D = get_node_or_null("Sensor") as Area2D
 @onready var collision_shape: CollisionShape2D = get_node_or_null("CollisionShape2D") as CollisionShape2D
-@onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
+@onready var visual: Node2D = get_node_or_null("Visual") as Node2D
 @onready var gate_light: PointLight2D = get_node_or_null("GateLight") as PointLight2D
 @onready var locked_label: Label = get_node_or_null("LockedLabel") as Label
 @onready var recharge_crystal: Node = get_node_or_null(recharge_crystal_path)
@@ -22,8 +22,13 @@ var opened := false
 var busy := false
 var can_respawn_crystal := true
 
+var original_visual_scale: Vector2 = Vector2.ONE
+
 
 func _ready() -> void:
+	if visual != null:
+		original_visual_scale = visual.scale
+
 	if sensor != null:
 		sensor.body_entered.connect(_on_sensor_body_entered)
 		sensor.body_exited.connect(_on_sensor_body_exited)
@@ -92,6 +97,7 @@ func close_gate() -> void:
 	if visual != null:
 		visual.visible = true
 		visual.modulate.a = 1.0
+		visual.scale = original_visual_scale
 
 	if gate_light != null:
 		gate_light.energy = 1.2
@@ -139,12 +145,10 @@ func _play_open_effect() -> void:
 		await get_tree().create_timer(open_time).timeout
 		return
 
-	var original_scale: Vector2 = visual.scale
-
 	var tween := create_tween()
 	tween.set_parallel(true)
 
-	tween.tween_property(visual, "scale", original_scale * Vector2(1.15, 1.35), open_time)
+	tween.tween_property(visual, "scale", original_visual_scale * Vector2(1.15, 1.35), open_time)
 	tween.tween_property(visual, "modulate:a", 0.0, open_time)
 
 	if gate_light != null:
@@ -153,7 +157,7 @@ func _play_open_effect() -> void:
 	await tween.finished
 
 	visual.visible = false
-	visual.scale = original_scale
+	visual.scale = original_visual_scale
 
 
 func _on_sensor_body_entered(body: Node) -> void:
