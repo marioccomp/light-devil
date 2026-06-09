@@ -33,7 +33,7 @@ var player_died := false
 
 var death_messages := [
 	"Você morreu.",
-	"A prisão ganhou essa rodada.",
+	"A caverna ganhou essa rodada.",
 	"Tutorial: 1 | Jogador: 0",
 	"Quase... só que não."
 ]

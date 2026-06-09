@@ -3,15 +3,22 @@ extends Node
 @export_file("*.tscn") var next_phase_scene_path: String = ""
 @export var death_reload_delay: float = 1.35
 @export var play_intro_camera: bool = true
-@export var intro_camera_offset: Vector2 = Vector2(650, -90)
+@export var intro_camera_offset: Vector2 = Vector2(0, -90)
 @onready var rune_hint_label: Label = get_tree().current_scene.get_node_or_null("UI/RuneHintLabel") as Label
 
 @onready var player: CharacterBody2D = $"../Player"
 @onready var game_camera: Camera2D = $"../Player/Camera2D"
+@onready var final_door_marker: Marker2D = $"../World/Markers/FinalDoorMarker"
 
 @onready var complete_label: Label = $"../UI/CompleteLabel"
 @onready var return_hint_label: Label = $"../UI/ReturnHintLabel"
 @onready var death_label: Label = $"../UI/DeathLabel"
+
+@onready var pet_light_title_label: Label = $"../UI/PetLightTitleLabel"
+@onready var pet_light_bar: ProgressBar = $"../UI/PetLightBar"
+@onready var pet_light_percent_label: Label = $"../UI/PetLightPercentLabel"
+@onready var pet_light_status_label: Label = $"../UI/PetLightStatusLabel"
+@onready var shadow_drain_warning_label: Label = $"../UI/ShadowDrainWarningLabel"
 
 @onready var end_menu: Control = $"../UI/EndMenu"
 @onready var repeat_tutorial_button: Button = $"../UI/EndMenu/RepeatTutorialButton"
@@ -64,7 +71,7 @@ func _start_level() -> void:
 		get_tree().set_meta(intro_key, true)
 
 		if game_camera != null and game_camera.has_method("play_intro_pan"):
-			var target_position := player.global_position + intro_camera_offset
+			var target_position := final_door_marker.global_position + intro_camera_offset
 			await game_camera.play_intro_pan(target_position)
 
 	if player.has_method("unlock_movement"):
@@ -86,6 +93,7 @@ func complete_phase() -> void:
 
 	complete_label.visible = true
 	end_menu.visible = true
+	_set_light_ui_visible(false)
 
 	if player.has_method("lock_movement"):
 		player.lock_movement()
@@ -168,3 +176,12 @@ func _show_pending_death_hint() -> void:
 
 	if rune_hint_label != null:
 		rune_hint_label.visible = false
+		
+		
+
+func _set_light_ui_visible(is_visible: bool) -> void:
+	pet_light_title_label.visible = is_visible
+	pet_light_bar.visible = is_visible
+	pet_light_percent_label.visible = is_visible
+	pet_light_status_label.visible = is_visible
+	shadow_drain_warning_label.visible = false

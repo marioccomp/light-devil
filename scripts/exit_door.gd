@@ -193,7 +193,19 @@ func _open_door() -> void:
 	door_sprite.frame = 0
 	door_sprite.play("open")
 
-	await door_sprite.animation_finished
+	var finished := false
+	door_sprite.animation_finished.connect(
+		func():
+			finished = true,
+		CONNECT_ONE_SHOT
+	)
+
+	var wait_time := 0.0
+	var max_wait_time := 1.2
+
+	while not finished and wait_time < max_wait_time:
+		await get_tree().process_frame
+		wait_time += get_process_delta_time()
 
 	door_is_animating = false
 	door_is_open = true
@@ -250,7 +262,19 @@ func _close_door_force() -> void:
 	door_sprite.frame = 0
 	door_sprite.play("close")
 
-	await door_sprite.animation_finished
+	var finished := false
+	door_sprite.animation_finished.connect(
+		func():
+			finished = true,
+		CONNECT_ONE_SHOT
+	)
+
+	var wait_time := 0.0
+	var max_wait_time := 1.2
+
+	while not finished and wait_time < max_wait_time:
+		await get_tree().process_frame
+		wait_time += get_process_delta_time()
 
 	door_is_animating = false
 	door_is_open = false
@@ -265,8 +289,18 @@ func _close_door_force() -> void:
 
 
 func _ensure_door_open_for_final() -> void:
-	while door_is_animating:
+	var wait_time := 0.0
+	var max_wait_time := 1.2
+
+	while door_is_animating and wait_time < max_wait_time:
 		await get_tree().process_frame
+		wait_time += get_process_delta_time()
+
+	if door_is_animating:
+		door_is_animating = false
+		door_is_open = true
+		_play_idle_open()
+		return
 
 	if door_is_open:
 		_play_idle_open()
