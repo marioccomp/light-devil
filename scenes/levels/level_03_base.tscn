@@ -1,0 +1,891 @@
+[gd_scene format=3 uid="uid://dpvx7savrxmxu"]
+
+[ext_resource type="Texture2D" uid="uid://dx8t6h8pbysy0" path="res://assets/background/cave/7.png" id="1_gy0ul"]
+[ext_resource type="Texture2D" uid="uid://cc1mw4cigokm5" path="res://assets/background/cave/6.png" id="2_a2yw4"]
+[ext_resource type="Texture2D" uid="uid://d1sncs2ljjko4" path="res://assets/background/cave/5.png" id="3_l0plo"]
+[ext_resource type="Texture2D" uid="uid://gqk3myibuovr" path="res://assets/background/cave/4.png" id="4_dh03t"]
+[ext_resource type="Texture2D" uid="uid://ce1tq7vfke30t" path="res://assets/background/cave/3.png" id="5_b02cd"]
+[ext_resource type="Texture2D" uid="uid://dhqwirw62rx5d" path="res://assets/background/cave/2.png" id="6_0xw4o"]
+[ext_resource type="Texture2D" uid="uid://cekv3xb2o23d3" path="res://assets/background/cave/1.png" id="7_4cmdm"]
+[ext_resource type="Texture2D" uid="uid://b1c55na37klcj" path="res://assets/dungeon/tiles/Black Grey Bricks ReOrganized.png" id="8_1ln2f"]
+[ext_resource type="Texture2D" uid="uid://dvvkc0h05208c" path="res://assets/Tiles.png" id="9_1m78e"]
+[ext_resource type="Script" uid="uid://4k7o0facxalq" path="res://scripts/death_zone.gd" id="11_u7n6n"]
+[ext_resource type="Script" uid="uid://d1kia3a7mo2l7" path="res://scripts/trap_block.gd" id="12_sii0r"]
+[ext_resource type="Script" uid="uid://cutr5lrhap1ng" path="res://scripts/trap_trigger.gd" id="14_apxba"]
+[ext_resource type="Script" uid="uid://chiadxx2o7eie" path="res://scripts/exit_door.gd" id="15_olri6"]
+[ext_resource type="Texture2D" uid="uid://c2tjesco78b10" path="res://assets/doors/cell_door_frames.png" id="16_p85ov"]
+[ext_resource type="Script" uid="uid://4846okceohyd" path="res://scripts/gravity_portal_animated.gd" id="22_a2yw4"]
+[ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="23_oh1y3"]
+[ext_resource type="Script" uid="uid://by1dx8gx5hdgu" path="res://scripts/level_02_manager.gd" id="24_gy0ul"]
+[ext_resource type="Script" uid="uid://df5m3fn2nf3bd" path="res://scripts/shadow_zone.gd" id="25_b02cd"]
+[ext_resource type="Script" uid="uid://bcjydbt83jfxd" path="res://scripts/light_crystal.gd" id="26_0xw4o"]
+[ext_resource type="Script" uid="uid://6o5v8mtctm0u" path="res://scripts/shadow_gate.gd" id="28_0xw4o"]
+[ext_resource type="Script" uid="uid://b2o7h1t7cf3u2" path="res://scripts/pet_light_bar.gd" id="36_7c247"]
+[ext_resource type="Script" uid="uid://dvuwv5fwp42xo" path="res://scripts/false_floor.gd" id="37_false_floor"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ijn0p"]
+texture = ExtResource("8_1ln2f")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1b0o8"]
+texture = ExtResource("9_1m78e")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jmes4"]
+sources/2 = SubResource("TileSetAtlasSource_ijn0p")
+sources/3 = SubResource("TileSetAtlasSource_1b0o8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ey3t"]
+size = Vector2(5500, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijn0p"]
+size = Vector2(60, 90)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w4kkx"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhiu8"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(0, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lswbx"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(64, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uujh0"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(128, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t34l"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(192, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy4h0"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(256, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5bmj"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(320, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqf6e"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(384, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stkom"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(448, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t8rk"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(448, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cag23"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pila"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(64, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d86x1"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(128, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uvka"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(192, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfb10"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(256, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_154ug"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(320, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y4a5"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(384, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj8ph"]
+atlas = ExtResource("16_p85ov")
+region = Rect2(448, 0, 64, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qy4h0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhiu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lswbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uujh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3t34l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy4h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5bmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqf6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stkom")
+}],
+"loop": 0,
+"name": &"close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t8rk")
+}],
+"loop": 1,
+"name": &"idle_open",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cag23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pila")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d86x1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uvka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfb10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_154ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y4a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj8ph")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4kkx"]
+size = Vector2(160, 105)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xw4o"]
+size = Vector2(5500, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3d41"]
+size = Vector2(700, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58gsx"]
+size = Vector2(340, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxf1p"]
+size = Vector2(700, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akboa"]
+size = Vector2(700, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tc36x"]
+size = Vector2(400, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2ahm"]
+size = Vector2(850, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hbv5"]
+size = Vector2(700, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esjmv"]
+size = Vector2(500, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpaua"]
+size = Vector2(220, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co6qv"]
+size = Vector2(90, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjxql"]
+size = Vector2(140, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aop6e"]
+size = Vector2(90, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txojl"]
+size = Vector2(110, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xf5l1"]
+size = Vector2(80, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5knf8"]
+size = Vector2(80, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxmk6"]
+size = Vector2(900, 260)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vkqoe"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_co6qv"]
+radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8rrg"]
+size = Vector2(70, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iaotu"]
+size = Vector2(180, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yddip"]
+size = Vector2(180, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7t7a"]
+size = Vector2(190, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwycc"]
+size = Vector2(180, 80)
+
+[node name="Level03_Base" type="Node2D" unique_id=543101429]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1495983408]
+
+[node name="CaveBackColor" type="ParallaxLayer" parent="ParallaxBackground" unique_id=25161063]
+position = Vector2(-600, 0)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveBackColor" unique_id=1086203116]
+position = Vector2(-30.999996, 40)
+scale = Vector2(10, 5)
+texture = ExtResource("1_gy0ul")
+centered = false
+
+[node name="CaveLayer06" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1723929648]
+position = Vector2(-300, 0)
+rotation = -0.0013868186
+motion_scale = Vector2(0.08, 0.02)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer06" unique_id=941871354]
+position = Vector2(-321, 16.999998)
+scale = Vector2(5.7916665, 3.9583335)
+texture = ExtResource("2_a2yw4")
+centered = false
+
+[node name="CaveLayer05" type="ParallaxLayer" parent="ParallaxBackground" unique_id=155964869]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.15, 0.03)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer05" unique_id=1456798605]
+position = Vector2(-72.000015, -40)
+scale = Vector2(5, 3.9629629)
+texture = ExtResource("3_l0plo")
+centered = false
+
+[node name="CaveLayer04" type="ParallaxLayer" parent="ParallaxBackground" unique_id=711407713]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.25, 0.04)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer04" unique_id=1220195920]
+position = Vector2(-299.99997, 0)
+scale = Vector2(5.78125, 3.9398148)
+texture = ExtResource("4_dh03t")
+centered = false
+
+[node name="CaveLayer03" type="ParallaxLayer" parent="ParallaxBackground" unique_id=970149993]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.35, 0.05)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer03" unique_id=1560112062]
+position = Vector2(-289, -24)
+scale = Vector2(5.78125, 3.9675927)
+texture = ExtResource("5_b02cd")
+centered = false
+
+[node name="CaveLayer02" type="ParallaxLayer" parent="ParallaxBackground" unique_id=891770651]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.5, 0.07)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer02" unique_id=1510362334]
+position = Vector2(-302, 0)
+scale = Vector2(5.786458, 3.9675927)
+texture = ExtResource("6_0xw4o")
+centered = false
+
+[node name="CaveLayer01" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1253325004]
+position = Vector2(-300, 0)
+motion_scale = Vector2(0.65, 0.1)
+motion_mirroring = Vector2(2215, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveLayer01" unique_id=295328346]
+scale = Vector2(5, 3.976852)
+texture = ExtResource("7_4cmdm")
+centered = false
+
+[node name="World" type="Node2D" parent="." unique_id=767684852]
+
+[node name="GroundTiles" type="TileMapLayer" parent="World" unique_id=2032026836]
+tile_set = SubResource("TileSet_jmes4")
+
+[node name="DeathZoneBottom" type="Area2D" parent="World" unique_id=716769776]
+position = Vector2(2350, 950)
+scale = Vector2(4, 1)
+script = ExtResource("11_u7n6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeathZoneBottom" unique_id=1060900570]
+position = Vector2(8, -1)
+shape = SubResource("RectangleShape2D_1ey3t")
+
+[node name="Markers" type="Node2D" parent="World" unique_id=1885258038]
+
+[node name="FinalDoorMarker" type="Marker2D" parent="World/Markers" unique_id=919020940]
+position = Vector2(4680, 435)
+
+[node name="StartDoorMarker" type="Marker2D" parent="World/Markers" unique_id=604217684]
+position = Vector2(120, 435)
+
+[node name="ControlRuneMarker" type="Marker2D" parent="World/Markers" unique_id=1464286147]
+position = Vector2(675, 455)
+
+[node name="TrapDownMarker" type="Marker2D" parent="World/Markers" unique_id=419722098]
+position = Vector2(900, 270)
+
+[node name="PortalEntryMarker" type="Marker2D" parent="World/Markers" unique_id=1830178241]
+position = Vector2(1120, 435)
+
+[node name="PortalExitMarker" type="Marker2D" parent="World/Markers" unique_id=1369249010]
+position = Vector2(1350, 275)
+
+[node name="LightCrystalMarker" type="Marker2D" parent="World/Markers" unique_id=2065283871]
+position = Vector2(1800, 255)
+
+[node name="TrapUpMarker" type="Marker2D" parent="World/Markers" unique_id=1515923428]
+position = Vector2(2050, 430)
+
+[node name="PortalReturnExitMarker" type="Marker2D" parent="World/Markers" unique_id=851306895]
+position = Vector2(2600, 435)
+
+[node name="Portal03ExitMarker" type="Marker2D" parent="World/Markers" unique_id=1105355452]
+position = Vector2(3600, 270)
+
+[node name="ExitDoor" type="Area2D" parent="World" unique_id=2026676205]
+position = Vector2(4700, 436)
+script = ExtResource("15_olri6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ExitDoor" unique_id=52139347]
+shape = SubResource("RectangleShape2D_ijn0p")
+
+[node name="Visual" type="ColorRect" parent="World/ExitDoor" unique_id=1869774844]
+visible = false
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = 45.0
+color = Color(0.8461248, 0.87464255, 0.9973914, 1)
+
+[node name="DoorSprite" type="AnimatedSprite2D" parent="World/ExitDoor" unique_id=1186570649]
+material = SubResource("CanvasItemMaterial_w4kkx")
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_qy4h0")
+animation = &"close"
+
+[node name="OpenRange" type="Area2D" parent="World/ExitDoor" unique_id=744021418]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ExitDoor/OpenRange" unique_id=1280009996]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_w4kkx")
+
+[node name="EnterMarker" type="Marker2D" parent="World/ExitDoor" unique_id=1356855935]
+position = Vector2(0, 10)
+
+[node name="DeathZoneTop" type="Area2D" parent="World" unique_id=761632388]
+position = Vector2(2350, -300)
+script = ExtResource("11_u7n6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeathZoneTop" unique_id=1727163342]
+shape = SubResource("RectangleShape2D_0xw4o")
+
+[node name="Blockout" type="Node2D" parent="World" unique_id=962187433]
+
+[node name="FloorStart" type="StaticBody2D" parent="World/Blockout" unique_id=1898572949]
+position = Vector2(350, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorStart" unique_id=1198854988]
+shape = SubResource("RectangleShape2D_h3d41")
+
+[node name="FloorFinal" type="StaticBody2D" parent="World/Blockout" unique_id=1067214170]
+position = Vector2(4500, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorFinal" unique_id=655976839]
+position = Vector2(80, 0)
+shape = SubResource("RectangleShape2D_58gsx")
+
+[node name="FloorAfterFalseArea" type="StaticBody2D" parent="World/Blockout" unique_id=86050877]
+position = Vector2(2050, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorAfterFalseArea" unique_id=2065561399]
+shape = SubResource("RectangleShape2D_rxf1p")
+
+[node name="FloorShadowArea" type="StaticBody2D" parent="World/Blockout" unique_id=141516721]
+position = Vector2(2750, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorShadowArea" unique_id=1065735169]
+shape = SubResource("RectangleShape2D_akboa")
+
+[node name="FloorPortalEntry" type="StaticBody2D" parent="World/Blockout" unique_id=593297729]
+position = Vector2(3350, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorPortalEntry" unique_id=695013658]
+shape = SubResource("RectangleShape2D_tc36x")
+
+[node name="UpperPortalFloor" type="StaticBody2D" parent="World/Blockout" unique_id=1454099029]
+position = Vector2(3900, 310)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/UpperPortalFloor" unique_id=1603606870]
+shape = SubResource("RectangleShape2D_l2ahm")
+
+[node name="LowerRecoveryFloor" type="StaticBody2D" parent="World/Blockout" unique_id=1365340714]
+position = Vector2(1500, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/LowerRecoveryFloor" unique_id=234695084]
+shape = SubResource("RectangleShape2D_6hbv5")
+
+[node name="FloorAfterGap01" type="StaticBody2D" parent="World/Blockout" unique_id=2143249858]
+position = Vector2(950, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorAfterGap01" unique_id=1628780599]
+shape = SubResource("RectangleShape2D_esjmv")
+
+[node name="FloorBetweenFalse" type="StaticBody2D" parent="World/Blockout" unique_id=663266764]
+position = Vector2(1450, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Blockout/FloorBetweenFalse" unique_id=1626997309]
+shape = SubResource("RectangleShape2D_lpaua")
+
+[node name="Interactables" type="Node2D" parent="World" unique_id=1611020674]
+
+[node name="Hazards" type="Node2D" parent="World" unique_id=692817276]
+
+[node name="TrapBlockIntro" type="Area2D" parent="World/Hazards" unique_id=1079163663]
+position = Vector2(650, 260)
+script = ExtResource("12_sii0r")
+fall_speed = 650.0
+active_time = 1.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/TrapBlockIntro" unique_id=822173125]
+shape = SubResource("RectangleShape2D_co6qv")
+
+[node name="TrapSprite" type="AnimatedSprite2D" parent="World/Hazards/TrapBlockIntro" unique_id=435983658]
+
+[node name="TriggerIntro" type="Area2D" parent="World/Hazards" unique_id=1850423521]
+position = Vector2(610, 455)
+script = ExtResource("14_apxba")
+trap_block_path = NodePath("../TrapBlockIntro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/TriggerIntro" unique_id=784028979]
+shape = SubResource("RectangleShape2D_gjxql")
+
+[node name="TrapBlockBait03" type="Area2D" parent="World/Hazards" unique_id=719984924]
+position = Vector2(2460, 260)
+script = ExtResource("12_sii0r")
+fall_speed = 720.0
+active_time = 1.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/TrapBlockBait03" unique_id=1852182381]
+shape = SubResource("RectangleShape2D_aop6e")
+
+[node name="TrapSprite" type="AnimatedSprite2D" parent="World/Hazards/TrapBlockBait03" unique_id=2104639443]
+
+[node name="TriggerBait03" type="Area2D" parent="World/Hazards" unique_id=1826416301]
+position = Vector2(2450, 455)
+script = ExtResource("14_apxba")
+trap_block_path = NodePath("../TrapBlockBait03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/TriggerBait03" unique_id=559195306]
+shape = SubResource("RectangleShape2D_txojl")
+
+[node name="Portals" type="Node2D" parent="World" unique_id=224629520]
+
+[node name="Portal03Exit" type="Node2D" parent="World/Portals" unique_id=1765883624]
+
+[node name="Visual" type="Node2D" parent="World/Portals/Portal03Exit" unique_id=301420417]
+
+[node name="Portal03Entry" type="Area2D" parent="World/Portals" unique_id=508544159]
+position = Vector2(3350, 435)
+script = ExtResource("22_a2yw4")
+target_marker_path = NodePath("../../Markers/Portal03ExitMarker")
+invert_gravity_on_exit = false
+invert_controls_on_exit = false
+exit_portal_visual_path = NodePath("../Portal03Exit/Visual")
+exit_position_offset = Vector2(70, 0)
+exit_velocity = Vector2(160, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Portals/Portal03Entry" unique_id=121759510]
+shape = SubResource("RectangleShape2D_xf5l1")
+
+[node name="Visual" type="Node2D" parent="World/Portals/Portal03Entry" unique_id=1237120915]
+
+[node name="FakePortal03" type="Area2D" parent="World/Portals" unique_id=1746819049]
+position = Vector2(4050, 150)
+script = ExtResource("11_u7n6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Portals/FakePortal03" unique_id=182427118]
+shape = SubResource("RectangleShape2D_5knf8")
+
+[node name="LightGameplay" type="Node2D" parent="World" unique_id=1639823949]
+
+[node name="ShadowZone03" type="Area2D" parent="World/LightGameplay" unique_id=1695265120]
+position = Vector2(2700, 450)
+script = ExtResource("25_b02cd")
+drain_per_second = 0.24
+minimum_light_power = 0.15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowZone03" unique_id=1640773722]
+shape = SubResource("RectangleShape2D_cxmk6")
+
+[node name="LightCrystalBait03" type="Area2D" parent="World/LightGameplay" unique_id=1860131938]
+position = Vector2(2450, 455)
+script = ExtResource("26_0xw4o")
+recharge_amount = 0.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/LightCrystalBait03" unique_id=2604485]
+shape = SubResource("CircleShape2D_vkqoe")
+
+[node name="LightCrystalSafe03" type="Area2D" parent="World/LightGameplay" unique_id=979935796]
+position = Vector2(2920, 455)
+script = ExtResource("26_0xw4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/LightCrystalSafe03" unique_id=979559717]
+shape = SubResource("CircleShape2D_co6qv")
+
+[node name="ShadowGate03" type="StaticBody2D" parent="World/LightGameplay" unique_id=1228999722]
+position = Vector2(3150, 440)
+script = ExtResource("28_0xw4o")
+recharge_crystal_path = NodePath("../LightCrystalSafe03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowGate03" unique_id=1262738163]
+shape = SubResource("RectangleShape2D_w8rrg")
+
+[node name="Sensor" type="Area2D" parent="World/LightGameplay/ShadowGate03" unique_id=1465657562]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowGate03/Sensor" unique_id=1583428888]
+shape = SubResource("RectangleShape2D_iaotu")
+
+[node name="Visual" type="Node2D" parent="World/LightGameplay/ShadowGate03" unique_id=847392398]
+
+[node name="FalseFloor01" type="AnimatableBody2D" parent="World" unique_id=1504683580]
+position = Vector2(1250, 520)
+script = ExtResource("37_false_floor")
+delay_before_fall = 0.18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor01" unique_id=1539744221]
+shape = SubResource("RectangleShape2D_yddip")
+
+[node name="Visual" type="ColorRect" parent="World/FalseFloor01" unique_id=555429058]
+offset_left = -90.0
+offset_top = -40.0
+offset_right = 90.0
+offset_bottom = 40.0
+color = Color(0.59734285, 0.6994898, 0.19066775, 1)
+
+[node name="Detector" type="Area2D" parent="World/FalseFloor01" unique_id=1254227163]
+position = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor01/Detector" unique_id=1561365922]
+shape = SubResource("RectangleShape2D_w7t7a")
+
+[node name="FalseFloorFinal03" type="AnimatableBody2D" parent="World" unique_id=28997558]
+position = Vector2(4320, 520)
+script = ExtResource("37_false_floor")
+delay_before_fall = 0.12
+fall_speed = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloorFinal03" unique_id=1871056023]
+position = Vector2(4320, 520)
+shape = SubResource("RectangleShape2D_iwycc")
+
+[node name="Visual" type="ColorRect" parent="World/FalseFloorFinal03" unique_id=1717987196]
+offset_left = -90.0
+offset_top = -40.0
+offset_right = 90.0
+offset_bottom = 40.0
+color = Color(0.59734285, 0.6994898, 0.19066775, 1)
+
+[node name="Detector" type="Area2D" parent="World/FalseFloorFinal03" unique_id=1064632687]
+position = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloorFinal03/Detector" unique_id=1980489048]
+shape = SubResource("RectangleShape2D_w7t7a")
+
+[node name="FalseFloor02" type="AnimatableBody2D" parent="World" unique_id=214242628]
+position = Vector2(1650, 520)
+script = ExtResource("37_false_floor")
+delay_before_fall = 0.18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor02" unique_id=760564265]
+shape = SubResource("RectangleShape2D_yddip")
+
+[node name="Visual" type="ColorRect" parent="World/FalseFloor02" unique_id=1838699076]
+offset_left = -90.0
+offset_top = -40.0
+offset_right = 90.0
+offset_bottom = 40.0
+color = Color(0.59734285, 0.6994898, 0.19066775, 1)
+
+[node name="Detector" type="Area2D" parent="World/FalseFloor02" unique_id=667934778]
+position = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FalseFloor02/Detector" unique_id=553058334]
+shape = SubResource("RectangleShape2D_w7t7a")
+
+[node name="Player" parent="." unique_id=574415046 instance=ExtResource("23_oh1y3")]
+position = Vector2(95, 456)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1626238330]
+visible = false
+color = Color(0.42, 0.44, 0.5, 1)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=980039613]
+
+[node name="CompleteLabel" type="Label" parent="UI" unique_id=1099804597]
+visible = false
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 32
+text = "Fase 2 concluída!"
+
+[node name="EndMenu" type="Control" parent="UI" unique_id=203539831]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RepeatTutorialButton" type="Button" parent="UI/EndMenu" unique_id=2006154426]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 260.0
+offset_bottom = 110.0
+text = "Repetir fase"
+
+[node name="NextPhaseButton" type="Button" parent="UI/EndMenu" unique_id=1992340978]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 260.0
+offset_bottom = 160.0
+text = "Pr�xima fase"
+
+[node name="QuitButton" type="Button" parent="UI/EndMenu" unique_id=1616151836]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 170.0
+offset_right = 260.0
+offset_bottom = 210.0
+text = "Fechar jogo"
+
+[node name="ReturnHintLabel" type="Label" parent="UI" unique_id=795231502]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "A porta era falsa... volte para o in�cio!"
+
+[node name="DeathLabel" type="Label" parent="UI" unique_id=423780143]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -22.5
+offset_right = 104.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Voc� morreu."
+
+[node name="RuneHintLabel" type="Label" parent="UI" unique_id=1017829165]
+visible = false
+offset_left = 260.0
+offset_top = 42.0
+offset_right = 1020.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 22
+text = "Cuidado, runas invertem seus controles"
+horizontal_alignment = 1
+
+[node name="PetLightTitleLabel" type="Label" parent="UI" unique_id=421936675]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 220.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 20
+text = "Luz do Pet"
+
+[node name="PetLightBar" type="ProgressBar" parent="UI" unique_id=167679311]
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 240.0
+offset_bottom = 127.0
+value = 100.0
+script = ExtResource("36_7c247")
+percent_label_path = NodePath("../PetLightPercentLabel")
+status_label_path = NodePath("../PetLightStatusLabel")
+warning_label_path = NodePath("../ShadowDrainWarningLabel")
+
+[node name="PetLightPercentLabel" type="Label" parent="UI" unique_id=552665914]
+offset_left = 250.0
+offset_top = 96.0
+offset_right = 330.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 18
+text = "100%"
+
+[node name="PetLightStatusLabel" type="Label" parent="UI" unique_id=1788341840]
+offset_left = 20.0
+offset_top = 128.0
+offset_right = 270.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 18
+text = "Luz forte"
+
+[node name="ShadowDrainWarningLabel" type="Label" parent="UI" unique_id=985234070]
+visible = false
+offset_left = 20.0
+offset_top = 160.0
+offset_right = 420.0
+offset_bottom = 195.0
+theme_override_font_sizes/font_size = 20
+text = "Sombra drenando sua luz"
+
+[node name="LevelManager" type="Node" parent="." unique_id=1096244592]
+script = ExtResource("24_gy0ul")
