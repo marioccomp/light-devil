@@ -2079,6 +2079,7 @@ texture = ExtResource("25_u5pqs")
 position = Vector2(88, 1210)
 rotation = 1.5707964
 script = ExtResource("10_yrube")
+reveal_only_with_pet_light = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/LowerWallTrap01" unique_id=1140400580]
 position = Vector2(7.5, 6.5)
@@ -2095,6 +2096,7 @@ z_index = 1
 position = Vector2(3440, 810)
 monitoring = false
 script = ExtResource("10_yrube")
+reveal_only_with_pet_light = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/FakeExitTrap03" unique_id=1059971865]
 position = Vector2(14, 5)
@@ -2111,6 +2113,7 @@ texture = ExtResource("25_u5pqs")
 position = Vector2(88, 1330)
 rotation = 1.5707964
 script = ExtResource("10_yrube")
+reveal_only_with_pet_light = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/LowerWallTrap02" unique_id=1208551924]
 position = Vector2(-15.5, 10.5)
