@@ -32,8 +32,6 @@
 [ext_resource type="Script" uid="uid://bcjydbt83jfxd" path="res://scripts/light_crystal.gd" id="31_v0by6"]
 [ext_resource type="Texture2D" uid="uid://dkyv7m5ws1k01" path="res://assets/interactables/crystals/crystal_5_64x64_12f_20d.png" id="32_uqjib"]
 [ext_resource type="Script" uid="uid://cye2vrwkd2guh" path="res://scripts/animated_loop_sprite.gd" id="33_lqtvr"]
-[ext_resource type="Script" uid="uid://6o5v8mtctm0u" path="res://scripts/shadow_gate.gd" id="34_jy88k"]
-[ext_resource type="Texture2D" uid="uid://cp1a2ow8ey0sb" path="res://assets/interactables/shrines/crystal_dark_64x64_12f_20d.png" id="35_mt38o"]
 [ext_resource type="Script" uid="uid://dvuwv5fwp42xo" path="res://scripts/false_floor.gd" id="36_om8jl"]
 [ext_resource type="PackedScene" uid="uid://wlfie5vbnm8i" path="res://scenes/player/player.tscn" id="37_u7cis"]
 [ext_resource type="Script" uid="uid://b2o7h1t7cf3u2" path="res://scripts/pet_light_bar.gd" id="38_1np1t"]
@@ -165,9 +163,6 @@ size = Vector2(729, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50wog"]
 size = Vector2(585.6027, 41)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3kn6"]
-size = Vector2(730.5882, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ey3t"]
 size = Vector2(2000, 100)
@@ -426,9 +421,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkk2g"]
 size = Vector2(90, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2yw4"]
-size = Vector2(110, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sii0r"]
 size = Vector2(38, 33.17169)
@@ -1003,9 +995,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xw4o"]
 size = Vector2(4000, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c247"]
-size = Vector2(850, 170)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ln2f"]
 size = Vector2(704, 170)
 
@@ -1098,104 +1087,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t5bkj")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 12.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cmdm"]
-size = Vector2(46, 170)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0p648"]
-size = Vector2(190, 170)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdomo"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jscet"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_giccb"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c3xj0"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6mx5h"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j7wsw"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3wlf"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pma08"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4vgpn"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(512, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m5kmd"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(576, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_47k8j"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hurca"]
-atlas = ExtResource("35_mt38o")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_tjxvn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cdomo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jscet")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_giccb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c3xj0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6mx5h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j7wsw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k3wlf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pma08")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4vgpn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m5kmd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_47k8j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hurca")
 }],
 "loop": true,
 "name": &"idle",
@@ -1575,24 +1466,6 @@ offset_right = 198.0
 offset_bottom = 20.0
 color = Color(0.5568628, 0.5568628, 0.5568628, 1)
 
-[node name="UpperFloor02" type="StaticBody2D" parent="World" unique_id=2117396687]
-position = Vector2(2150, 210)
-scale = Vector2(0.85, 0.85)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/UpperFloor02" unique_id=2046134176]
-position = Vector2(1.7646484, 3.9999847)
-scale = Vector2(1.0000002, 1.0000002)
-shape = SubResource("RectangleShape2D_v3kn6")
-disabled = true
-
-[node name="Visual" type="ColorRect" parent="World/UpperFloor02" unique_id=1967239273]
-visible = false
-offset_left = -360.0
-offset_top = -20.0
-offset_right = 360.0
-offset_bottom = 20.0
-color = Color(0.5568628, 0.5568628, 0.5568628, 1)
-
 [node name="DeathZoneBottom" type="Area2D" parent="World" unique_id=716769776]
 position = Vector2(3500, 1500)
 scale = Vector2(4, 1)
@@ -1605,7 +1478,7 @@ shape = SubResource("RectangleShape2D_1ey3t")
 [node name="Markers" type="Node2D" parent="World" unique_id=1885258038]
 
 [node name="FinalDoorMarker" type="Marker2D" parent="World/Markers" unique_id=919020940]
-position = Vector2(5950, 435)
+position = Vector2(4350, 286)
 
 [node name="StartDoorMarker" type="Marker2D" parent="World/Markers" unique_id=604217684]
 position = Vector2(120, 435)
@@ -1976,21 +1849,6 @@ offset_right = 125.0
 offset_bottom = -125.0
 color = Color(0.64036494, 0.43455917, 0.213599, 1)
 
-[node name="TriggerTrapUp" type="Area2D" parent="World/Hazards" unique_id=321108893]
-position = Vector2(2000, 255)
-script = ExtResource("24_a10ds")
-trap_block_path = NodePath("../TrapBlockUp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hazards/TriggerTrapUp" unique_id=1138091741]
-shape = SubResource("RectangleShape2D_a2yw4")
-
-[node name="Visual" type="ColorRect" parent="World/Hazards/TriggerTrapUp" unique_id=1423614382]
-offset_left = -55.0
-offset_top = -60.0
-offset_right = 55.0
-offset_bottom = 60.0
-color = Color(0.3762989, 0.3980494, 0.1739834, 1)
-
 [node name="TriggerCentralBall01" type="Area2D" parent="World/Hazards" unique_id=284267773]
 position = Vector2(2160, 790)
 script = ExtResource("24_a10ds")
@@ -2284,6 +2142,7 @@ animation = &"idle"
 script = ExtResource("28_ka1dv")
 
 [node name="OrangePortalExit03" type="Node2D" parent="World/Portals" unique_id=1506575237]
+visible = false
 position = Vector2(1330, 785)
 
 [node name="PortalLight" type="PointLight2D" parent="World/Portals/OrangePortalExit03" unique_id=28245824]
@@ -2347,30 +2206,6 @@ script = ExtResource("10_yrube")
 shape = SubResource("RectangleShape2D_0xw4o")
 
 [node name="LightGameplay" type="Node2D" parent="World" unique_id=1080885536]
-
-[node name="ShadowZoneSpikes01" type="Area2D" parent="World/LightGameplay" unique_id=1245418933]
-position = Vector2(5120, 435)
-script = ExtResource("30_cctgy")
-drain_per_second = 0.3
-minimum_light_power = 0.1
-shadow_color = Color(0.023459109, 0.11765314, 0.18033516, 1)
-min_shadow_blend = 0.25
-max_shadow_blend = 0.72
-transition_speed = 5.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowZoneSpikes01" unique_id=2040808038]
-scale = Vector2(0.8, 1)
-shape = SubResource("RectangleShape2D_7c247")
-
-[node name="Visual" type="ColorRect" parent="World/LightGameplay/ShadowZoneSpikes01" unique_id=788082174]
-visible = false
-z_index = -10
-offset_left = -425.0
-offset_top = -85.0
-offset_right = -385.0
-offset_bottom = -45.0
-scale = Vector2(170, 170)
-color = Color(0.078431375, 0.101960786, 0.3019608, 0.13725491)
 
 [node name="ShadowZoneBait01" type="Area2D" parent="World/LightGameplay" unique_id=556953318]
 position = Vector2(4320, 435)
@@ -2506,58 +2341,6 @@ script = ExtResource("31_v0by6")
 position = Vector2(0, -20)
 rotation = 0.00045749056
 shape = SubResource("RectangleShape2D_1m78e")
-
-[node name="ShadowGate01" type="StaticBody2D" parent="World/LightGameplay" unique_id=1125825789]
-position = Vector2(2220, 255)
-script = ExtResource("34_jy88k")
-required_light_power = 0.7
-recharge_crystal_path = NodePath("../CentralLightCrystal03")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowGate01" unique_id=1792535045]
-shape = SubResource("RectangleShape2D_4cmdm")
-
-[node name="Sensor" type="Area2D" parent="World/LightGameplay/ShadowGate01" unique_id=11598564]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LightGameplay/ShadowGate01/Sensor" unique_id=2016795613]
-shape = SubResource("RectangleShape2D_0p648")
-
-[node name="GateLight" type="PointLight2D" parent="World/LightGameplay/ShadowGate01" unique_id=2117559153]
-color = Color(0.6570166, 0.6855572, 1, 1)
-energy = 1.2
-texture = ExtResource("20_nip07")
-texture_scale = 0.7
-
-[node name="LockedLabel" type="Label" parent="World/LightGameplay/ShadowGate01" unique_id=995835802]
-visible = false
-offset_left = -55.0
-offset_top = -148.0
-offset_right = 290.0
-offset_bottom = -125.0
-text = "Luz fraca! Recolha cristais para abrir o portal"
-
-[node name="Visual" type="Node2D" parent="World/LightGameplay/ShadowGate01" unique_id=326116067]
-
-[node name="SealBeam" type="ColorRect" parent="World/LightGameplay/ShadowGate01/Visual" unique_id=1595875930]
-offset_left = -12.0
-offset_top = -85.0
-offset_right = 12.0
-offset_bottom = 85.0
-color = Color(0.50980395, 0.59607846, 0.8980392, 0.5294118)
-
-[node name="ShrineTop" type="AnimatedSprite2D" parent="World/LightGameplay/ShadowGate01/Visual" unique_id=1302287486]
-z_index = 7
-position = Vector2(0, -92)
-sprite_frames = SubResource("SpriteFrames_tjxvn")
-animation = &"idle"
-script = ExtResource("33_lqtvr")
-
-[node name="ShrineBottom" type="AnimatedSprite2D" parent="World/LightGameplay/ShadowGate01/Visual" unique_id=669098194]
-z_index = 7
-position = Vector2(0, 92)
-scale = Vector2(1, -1)
-sprite_frames = SubResource("SpriteFrames_tjxvn")
-animation = &"idle"
-script = ExtResource("33_lqtvr")
 
 [node name="BlueFallingBlock03" type="AnimatableBody2D" parent="World" unique_id=1920131042]
 position = Vector2(1280, 520)
@@ -2700,7 +2483,7 @@ tile_set = SubResource("TileSet_jmes4")
 collision_enabled = false
 
 [node name="Player" parent="." unique_id=574415046 instance=ExtResource("37_u7cis")]
-position = Vector2(45, 456)
+position = Vector2(57, 475)
 death_limit_y = 1600.0
 death_limit_left_x = -250.0
 death_limit_right_x = 4800.0
@@ -2836,4 +2619,3 @@ text = "Sombra drenando sua luz"
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("39_yonad")
-play_intro_camera = false
