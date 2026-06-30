@@ -6,6 +6,7 @@ extends AnimatableBody2D
 
 @export var delay_before_fall: float = 0.15
 @export var fall_speed: float = 420.0
+@export var fall_direction: Vector2 = Vector2.DOWN
 @export var reset_after: float = 1.5
 
 var activated := false
@@ -17,8 +18,19 @@ func _ready() -> void:
 	detector.body_entered.connect(_on_detector_body_entered)
 
 func _physics_process(delta: float) -> void:
-	if falling:
-		global_position.y += fall_speed * delta
+	if not falling:
+		return
+
+	var direction := fall_direction
+
+	if direction == Vector2.ZERO:
+		direction = Vector2.DOWN
+
+	global_position += (
+		direction.normalized()
+		* fall_speed
+		* delta
+	)
 
 func _on_detector_body_entered(body: Node) -> void:
 	if activated:

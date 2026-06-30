@@ -71,7 +71,20 @@ func _ready() -> void:
 		pet_light.color = _get_animated_light_color(Time.get_ticks_msec() / 1000.0)
 
 	if player != null:
-		global_position = player.global_position + offset_when_player_faces_left
+		var player_sprite: AnimatedSprite2D = (
+			player.get_node_or_null("AnimatedSprite2D")
+			as AnimatedSprite2D
+		)
+
+		var gravity_direction := _get_player_gravity_direction()
+
+		global_position = (
+			player.global_position
+			+ _get_oriented_offset(
+				player_sprite,
+				gravity_direction
+			)
+		)
 
 	_apply_pet_color(_get_animated_light_color(Time.get_ticks_msec() / 1000.0))
 
@@ -80,31 +93,36 @@ func _process(delta: float) -> void:
 	if player == null:
 		return
 
-	var player_sprite: AnimatedSprite2D = player.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	var player_sprite: AnimatedSprite2D = (
+		player.get_node_or_null("AnimatedSprite2D")
+		as AnimatedSprite2D
+	)
 
-	var gravity_inverted := false
+	var gravity_direction := _get_player_gravity_direction()
 
-	if player.has_method("is_gravity_inverted"):
-		gravity_inverted = player.is_gravity_inverted()
-
-	var offset: Vector2 = offset_when_player_faces_left
-
-	if gravity_inverted:
-		offset = inverted_offset_when_player_faces_left
-
-	if player_sprite != null and player_sprite.flip_h:
-		if gravity_inverted:
-			offset = inverted_offset_when_player_faces_right
-		else:
-			offset = offset_when_player_faces_right
+	var offset := _get_oriented_offset(
+		player_sprite,
+		gravity_direction
+	)
 
 	var time: float = Time.get_ticks_msec() / 1000.0
 	var base_light_color: Color = _get_animated_light_color(time)
-	var powered_light_color: Color = weak_light_color.lerp(base_light_color, light_power)
+	var powered_light_color: Color = weak_light_color.lerp(
+		base_light_color,
+		light_power
+	)
 
-	var floating: Vector2 = Vector2(0.0, sin(time * bob_speed) * bob_amount)
+	var floating: Vector2 = (
+		-gravity_direction
+		* sin(time * bob_speed)
+		* bob_amount
+	)
 
-	var target_position: Vector2 = player.global_position + offset + floating
+	var target_position: Vector2 = (
+		player.global_position
+		+ offset
+		+ floating
+	)
 
 	global_position = global_position.lerp(
 		target_position,
@@ -112,17 +130,89 @@ func _process(delta: float) -> void:
 	)
 
 	if pet_light != null:
-		var flicker: float = 1.0 + sin(time * light_flicker_speed) * light_flicker_strength
-		flicker += sin(time * (light_flicker_speed * 1.91)) * (light_flicker_strength * 0.5)
+		var flicker: float = (
+			1.0
+			+ sin(time * light_flicker_speed)
+			* light_flicker_strength
+		)
 
-		var energy_multiplier: float = lerpf(weak_light_energy_multiplier, 1.0, light_power)
-		var radius_multiplier: float = lerpf(weak_light_radius_multiplier, 1.0, light_power)
+		flicker += (
+			sin(time * (light_flicker_speed * 1.91))
+			* (light_flicker_strength * 0.5)
+		)
 
-		pet_light.energy = maxf(light_energy * energy_multiplier * flicker, 0.0)
-		pet_light.texture_scale = _get_light_texture_scale() * radius_multiplier * (1.0 + (flicker - 1.0) * 0.08)
+		var energy_multiplier: float = lerpf(
+			weak_light_energy_multiplier,
+			1.0,
+			light_power
+		)
+
+		var radius_multiplier: float = lerpf(
+			weak_light_radius_multiplier,
+			1.0,
+			light_power
+		)
+
+		pet_light.energy = maxf(
+			light_energy
+			* energy_multiplier
+			* flicker,
+			0.0
+		)
+
+		pet_light.texture_scale = (
+			_get_light_texture_scale()
+			* radius_multiplier
+			* (1.0 + (flicker - 1.0) * 0.08)
+		)
+
 		pet_light.color = powered_light_color
 
 	_apply_pet_color(powered_light_color)
+
+
+func _get_player_gravity_direction() -> Vector2:
+	if player == null:
+		return Vector2.DOWN
+
+	if not player.has_method("get_gravity_direction"):
+		return Vector2.DOWN
+
+	var direction_value: Variant = player.call(
+		"get_gravity_direction"
+	)
+
+	if direction_value is Vector2:
+		return direction_value
+
+	return Vector2.DOWN
+
+
+func _get_oriented_offset(
+	player_sprite: AnimatedSprite2D,
+	gravity_direction: Vector2
+) -> Vector2:
+	var base_offset := offset_when_player_faces_left
+
+	if player_sprite != null and player_sprite.flip_h:
+		base_offset = offset_when_player_faces_right
+
+	if gravity_direction == Vector2.UP:
+		if player_sprite != null and player_sprite.flip_h:
+			return inverted_offset_when_player_faces_right
+
+		return inverted_offset_when_player_faces_left
+
+	if gravity_direction == Vector2.LEFT:
+		return base_offset.rotated(PI / 2.0)
+
+	if gravity_direction == Vector2.RIGHT:
+		return base_offset.rotated(-PI / 2.0)
+
+	return base_offset
+
+
+
 
 
 func set_light_power(value: float) -> void:
