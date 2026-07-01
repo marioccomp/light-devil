@@ -1,10 +1,26 @@
 extends Area2D
 
+enum ExitGravityMode {
+	USE_OLD_SETTING,
+	DOWN,
+	UP,
+	LEFT,
+	RIGHT
+}
+
 @export var target_marker_path: NodePath
 
 @export var invert_gravity_on_exit: bool = true
 @export var invert_controls_on_exit: bool = true
 @export var one_shot: bool = true
+
+@export_group("Exit Orientation")
+@export_enum("Use Old Setting", "Down", "Up", "Left", "Right")
+var exit_gravity_mode: int = ExitGravityMode.USE_OLD_SETTING
+
+@export var rotate_exit_vectors_with_marker: bool = false
+@export_group("")
+
 
 @export var pull_time: float = 0.22
 @export var disappear_time: float = 0.10
@@ -90,13 +106,26 @@ func _on_body_entered(body: Node2D) -> void:
 	await _play_entry_close()
 
 	# Move o jogador invisível para o portal de saída.
+	var resolved_exit_offset: Vector2 = exit_position_offset
+	var resolved_exit_velocity: Vector2 = exit_velocity
+
+	if rotate_exit_vectors_with_marker:
+		resolved_exit_offset = exit_position_offset.rotated(
+			target_marker.global_rotation
+		)
+
+		resolved_exit_velocity = exit_velocity.rotated(
+			target_marker.global_rotation
+		)
+
 	var exit_start_position: Vector2 = target_marker.global_position
-	var exit_end_position: Vector2 = target_marker.global_position + exit_position_offset
+	var exit_end_position: Vector2 = (
+		target_marker.global_position + resolved_exit_offset
+	)
 
 	body.global_position = exit_start_position
 
-	if body.has_method("set_gravity_inverted"):
-		body.set_gravity_inverted(invert_gravity_on_exit)
+	_apply_exit_gravity(body)
 
 	if body.has_method("set_controls_inverted"):
 		body.set_controls_inverted(invert_controls_on_exit)
@@ -123,7 +152,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if body is CharacterBody2D:
 		if spit_player_on_exit:
-			body.velocity = exit_velocity
+			body.velocity = resolved_exit_velocity
 		else:
 			body.velocity = Vector2.ZERO
 
@@ -131,6 +160,41 @@ func _on_body_entered(body: Node2D) -> void:
 		body.unlock_movement()
 
 	busy = false
+
+func _apply_exit_gravity(body: Node2D) -> void:
+	
+	if exit_gravity_mode == ExitGravityMode.USE_OLD_SETTING:
+		if body.has_method("set_gravity_inverted"):
+			body.call(
+				"set_gravity_inverted",
+				invert_gravity_on_exit
+			)
+
+		return
+
+	if not body.has_method("set_gravity_direction"):
+		push_warning(
+			"Portal: Player não possui set_gravity_direction()."
+		)
+		return
+
+	var new_direction := Vector2.DOWN
+
+	match exit_gravity_mode:
+		ExitGravityMode.DOWN:
+			new_direction = Vector2.DOWN
+
+		ExitGravityMode.UP:
+			new_direction = Vector2.UP
+
+		ExitGravityMode.LEFT:
+			new_direction = Vector2.LEFT
+
+		ExitGravityMode.RIGHT:
+			new_direction = Vector2.RIGHT
+
+	body.call("set_gravity_direction", new_direction)
+
 
 
 func _pull_player_to_portal(body: Node2D) -> void:

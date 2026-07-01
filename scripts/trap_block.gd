@@ -38,6 +38,16 @@ func _physics_process(delta: float) -> void:
 		trap_sprite.rotation += rotation_speed * delta
 
 
+
+func activate_with_direction(new_direction: Vector2) -> void:
+	if new_direction != Vector2.ZERO:
+		fall_direction = new_direction.normalized()
+
+	activate()
+
+
+
+
 func activate() -> void:
 	if active:
 		return

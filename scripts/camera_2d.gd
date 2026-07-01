@@ -1,5 +1,18 @@
 extends Camera2D
+@export_group("Intro Camera Zoom")
 
+@export var intro_zoom := Vector2(0.85, 0.85)
+
+@export_range(0.1, 3.0, 0.05)
+var intro_zoom_out_time: float = 0.60
+
+@export_range(0.0, 20.0, 0.10)
+var intro_zoom_hold_time: float = 8.40
+
+@export_range(0.1, 3.0, 0.05)
+var intro_zoom_return_time: float = 0.60
+
+@export_group("")
 var default_zoom: Vector2
 var default_position: Vector2
 
@@ -53,7 +66,7 @@ func play_intro_pan(target_global_position: Vector2) -> void:
 		intro_tween.kill()
 
 	reset_camera()
-
+	zoom = Vector2(0.8, 0.8)
 	var start_global_position := global_position
 
 	# Mantém a altura inicial da câmera.
@@ -64,7 +77,23 @@ func play_intro_pan(target_global_position: Vector2) -> void:
 	)
 
 	intro_tween = create_tween()
+	zoom_tween = create_tween()
 
+	zoom_tween.tween_property(
+		self,
+		"zoom",
+		intro_zoom,
+		intro_zoom_out_time
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	zoom_tween.tween_interval(intro_zoom_hold_time)
+
+	zoom_tween.tween_property(
+		self,
+		"zoom",
+		default_zoom,
+		intro_zoom_return_time
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	intro_tween.tween_interval(0.25)
 
 	intro_tween.tween_property(

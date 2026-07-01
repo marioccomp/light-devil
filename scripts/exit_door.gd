@@ -6,8 +6,15 @@ extends Area2D
 @export var close_delay: float = 0.10
 @export var door_open_fps: float = 10.0
 @export var door_close_fps: float = 10.0
-
+@export_group("Fake Door")
+@export var is_fake_door: bool = false
+@export var fake_disappear_time: float = 0.15
+@export var fake_trap_path: NodePath
+@export_group("")
 @onready var level_manager: Node = $"../../LevelManager"
+@onready var fake_trap: Area2D = (
+	get_node_or_null(fake_trap_path) as Area2D
+)
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
 @onready var door_sprite: AnimatedSprite2D = get_node_or_null("DoorSprite") as AnimatedSprite2D
 @onready var open_range: Area2D = get_node_or_null("OpenRange") as Area2D
@@ -69,6 +76,10 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
 
+	if is_fake_door:
+		await _handle_fake_door()
+		return
+
 	var is_returning := false
 
 	if level_manager != null:
@@ -93,6 +104,46 @@ func _on_body_entered(body: Node) -> void:
 		open_range.set_deferred("monitoring", false)
 
 	await _handle_final_door_enter(body)
+
+
+func _handle_fake_door() -> void:
+	final_animation_running = true
+	set_deferred("monitoring", false)
+
+	if open_range != null:
+		open_range.set_deferred("monitoring", false)
+
+	var tween := create_tween()
+
+	tween.tween_property(
+		self,
+		"modulate:a",
+		0.0,
+		fake_disappear_time
+	)
+
+	await tween.finished
+
+	visible = false
+
+	var camera := get_tree().get_first_node_in_group(
+		"game_camera"
+	)
+
+	if camera != null and camera.has_method("shake"):
+		camera.call("shake", 0.35, 12.0)
+
+	if fake_trap != null:
+		fake_trap.set_deferred("monitoring", true)
+		fake_trap.set_deferred("monitorable", true)
+
+		var trap_collision := (
+			fake_trap.get_node_or_null("CollisionShape2D")
+			as CollisionShape2D
+		)
+
+		if trap_collision != null:
+			trap_collision.set_deferred("disabled", false)
 
 
 func _handle_final_door_enter(player: Node) -> void:

@@ -5,6 +5,16 @@ extends Area2D
 @export var one_shot: bool = true
 @export var show_visual: bool = false
 
+
+
+
+@export_group("Activation Direction")
+@export var override_activation_direction: bool = false
+@export var activation_direction: Vector2 = Vector2.DOWN
+@export_group("")
+
+
+
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
 
@@ -52,5 +62,16 @@ func _on_body_entered(body: Node) -> void:
 		was_used = true
 		set_active(false)
 
-	if trap_block != null and trap_block.has_method("activate"):
-		trap_block.activate()
+	if trap_block == null:
+		return
+
+	if (
+		override_activation_direction
+		and trap_block.has_method("activate_with_direction")
+	):
+		trap_block.call(
+			"activate_with_direction",
+			activation_direction
+		)
+	elif trap_block.has_method("activate"):
+		trap_block.call("activate")

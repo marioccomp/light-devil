@@ -4,21 +4,37 @@ extends CharacterBody2D
 @export var jump_force: float = -430.0
 @export var gravity: float = 1200.0
 @export var death_delay: float = 0.85
+@export var death_limit_y: float = 900.0
+@export var death_limit_left_x: float = -100000.0
+@export var death_limit_right_x: float = 100000.0
+@export var death_limit_top_y: float = -100000.0
 @export var normal_sprite_position: Vector2 = Vector2(0, -18)
 @export var inverted_sprite_position: Vector2 = Vector2(0, 1)
 
 @onready var anim: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 @onready var visual: CanvasItem = get_node_or_null("Visual") as CanvasItem
+@onready var collision_shape: CollisionShape2D = get_node_or_null("CollisionShape2D") as CollisionShape2D
 
 var input_locked := false
 var dead := false
 var controls_inverted := false
 var gravity_inverted := false
-var gravity_sign := 1.0
 
+var gravity_direction := Vector2.DOWN
+var base_collision_position := Vector2.ZERO
+var base_anim_scale := Vector2.ONE
 
 func _ready() -> void:
-	up_direction = Vector2.UP
+	if collision_shape != null:
+		base_collision_position = collision_shape.position
+
+	if anim != null:
+		base_anim_scale = Vector2(
+			absf(anim.scale.x),
+			absf(anim.scale.y)
+		)
+
+	set_gravity_direction(Vector2.DOWN)
 
 	if visual != null:
 		visual.visible = false
@@ -42,35 +58,56 @@ func _physics_process(delta: float) -> void:
 		_update_animation()
 		return
 
-	var direction := Input.get_axis("move_left", "move_right")
+	var movement_input := Vector2(
+		Input.get_axis("move_left", "move_right"),
+		Input.get_axis("move_up", "move_down")
+	)
+
+	var surface_direction := get_surface_direction()
+	var direction := movement_input.dot(surface_direction)
+
 	if controls_inverted:
 		direction *= -1.0
 
-	velocity.x = direction * speed
+	var gravity_speed := velocity.dot(gravity_direction)
 
-	if direction < 0:
+	velocity = (
+		surface_direction * direction * speed
+		+ gravity_direction * gravity_speed
+	)
+
+	var world_movement := surface_direction * direction
+
+	if world_movement.x < -0.01:
 		_set_facing_left(false)
-	elif direction > 0:
+	elif world_movement.x > 0.01:
 		_set_facing_left(true)
 
 	if not is_on_floor():
-		velocity.y += gravity * gravity_sign * delta
+		velocity += gravity_direction * gravity * delta
 	else:
-		if gravity_sign > 0.0 and velocity.y > 0:
-			velocity.y = 0
-		elif gravity_sign < 0.0 and velocity.y < 0:
-			velocity.y = 0
+		gravity_speed = velocity.dot(gravity_direction)
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_force * gravity_sign
+		if gravity_speed > 0.0:
+			velocity -= gravity_direction * gravity_speed
+
+	if _is_jump_just_pressed() and is_on_floor():
+		var surface_speed := velocity.dot(surface_direction)
+
+		velocity = surface_direction * surface_speed
+		velocity += -gravity_direction * absf(jump_force)
 
 	move_and_slide()
 
 	_update_animation()
 
-	if global_position.y > 900:
+	if (
+		global_position.y > death_limit_y
+		or global_position.y < death_limit_top_y
+		or global_position.x < death_limit_left_x
+		or global_position.x > death_limit_right_x
+	):
 		die()
-
 
 func _update_animation() -> void:
 	if anim == null:
@@ -79,14 +116,21 @@ func _update_animation() -> void:
 	if dead:
 		return
 
+	var surface_direction := get_surface_direction()
+
 	if not is_on_floor():
-		if velocity.y * gravity_sign < 0:
+		var gravity_speed := velocity.dot(gravity_direction)
+
+		if gravity_speed < 0.0:
 			_play_anim("jump")
 		else:
 			_play_anim("fall")
+
 		return
 
-	if abs(velocity.x) > 1.0:
+	var surface_speed := velocity.dot(surface_direction)
+
+	if absf(surface_speed) > 1.0:
 		_play_anim("run")
 	else:
 		_play_anim("idle")
@@ -131,23 +175,114 @@ func set_controls_inverted(enabled: bool) -> void:
 
 
 func set_gravity_inverted(enabled: bool) -> void:
-	gravity_inverted = enabled
-	gravity_sign = -1.0 if gravity_inverted else 1.0
-	up_direction = Vector2.DOWN if gravity_inverted else Vector2.UP
+	if enabled:
+		set_gravity_direction(Vector2.UP)
+	else:
+		set_gravity_direction(Vector2.DOWN)
 
-	if anim != null:
-		if gravity_inverted:
-			anim.scale.y = -absf(anim.scale.y)
-			anim.position = inverted_sprite_position
+
+func set_gravity_direction(new_direction: Vector2) -> void:
+	if new_direction == Vector2.ZERO:
+		return
+
+	if absf(new_direction.x) > absf(new_direction.y):
+		if new_direction.x > 0.0:
+			gravity_direction = Vector2.RIGHT
 		else:
-			anim.scale.y = absf(anim.scale.y)
-			anim.position = normal_sprite_position
+			gravity_direction = Vector2.LEFT
+	else:
+		if new_direction.y > 0.0:
+			gravity_direction = Vector2.DOWN
+		else:
+			gravity_direction = Vector2.UP
 
-	velocity.y = 0
+	gravity_inverted = gravity_direction == Vector2.UP
+	up_direction = -gravity_direction
+
+	var surface_direction := get_surface_direction()
+	var surface_speed := velocity.dot(surface_direction)
+
+	velocity = surface_direction * surface_speed
+
+	_apply_orientation_visuals()
+
 
 func is_gravity_inverted() -> bool:
-	return gravity_inverted
+	return gravity_direction == Vector2.UP
 
+
+func get_gravity_direction() -> Vector2:
+	return gravity_direction
+
+
+func get_surface_direction() -> Vector2:
+	return Vector2(
+		gravity_direction.y,
+		-gravity_direction.x
+	)
+
+
+func _is_jump_just_pressed() -> bool:
+	if Input.is_action_just_pressed("jump"):
+		return true
+
+	var jump_direction := -gravity_direction
+
+	if jump_direction == Vector2.UP:
+		return Input.is_action_just_pressed("move_up")
+
+	if jump_direction == Vector2.DOWN:
+		return Input.is_action_just_pressed("move_down")
+
+	if jump_direction == Vector2.LEFT:
+		return Input.is_action_just_pressed("move_left")
+
+	if jump_direction == Vector2.RIGHT:
+		return Input.is_action_just_pressed("move_right")
+
+	return false
+
+
+func _apply_orientation_visuals() -> void:
+	if collision_shape != null:
+		if gravity_direction == Vector2.LEFT:
+			collision_shape.rotation = PI / 2.0
+			collision_shape.position = base_collision_position.rotated(PI / 2.0)
+
+		elif gravity_direction == Vector2.RIGHT:
+			collision_shape.rotation = -PI / 2.0
+			collision_shape.position = base_collision_position.rotated(-PI / 2.0)
+
+		else:
+			collision_shape.rotation = 0.0
+			collision_shape.position = base_collision_position
+
+	if anim == null:
+		return
+
+	if gravity_direction == Vector2.DOWN:
+		anim.rotation = 0.0
+		anim.scale = base_anim_scale
+		anim.position = normal_sprite_position
+
+	elif gravity_direction == Vector2.UP:
+		anim.rotation = 0.0
+		anim.scale = Vector2(
+			base_anim_scale.x,
+			-base_anim_scale.y
+		)
+		anim.position = inverted_sprite_position
+
+	elif gravity_direction == Vector2.LEFT:
+		anim.rotation = PI / 2.0
+		anim.scale = base_anim_scale
+		anim.position = normal_sprite_position.rotated(PI / 2.0)
+
+	elif gravity_direction == Vector2.RIGHT:
+		anim.rotation = -PI / 2.0
+		anim.scale = base_anim_scale
+		anim.position = normal_sprite_position.rotated(-PI / 2.0)
+		
 func die() -> void:
 	if dead:
 		return
@@ -183,7 +318,12 @@ func force_fall() -> void:
 	if dead:
 		return
 
-	velocity.y = max(velocity.y, 420.0)
+	var current_fall_speed := velocity.dot(gravity_direction)
+
+	if current_fall_speed < 420.0:
+		velocity += gravity_direction * (
+			420.0 - current_fall_speed
+		)
 	
 func _prepare_rune_death_hint() -> void:
 	var hint_until_msec := int(get_tree().get_meta("control_rune_tip_until_msec", 0))
