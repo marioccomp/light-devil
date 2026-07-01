@@ -358,7 +358,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_octqu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"roll",
 "speed": 12.0
 }]
@@ -470,7 +470,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_stkom")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 10.0
 }, {
@@ -478,7 +478,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5t8rk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_open",
 "speed": 1.0
 }, {
@@ -507,7 +507,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yj8ph")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 10.0
 }]
@@ -539,8 +539,8 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(2215, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CaveBackColor" unique_id=1086203116]
-position = Vector2(665, 185.99998)
-scale = Vector2(5.776041, 3.9629629)
+position = Vector2(-340, -384)
+scale = Vector2(8.393229, 7.259259)
 texture = ExtResource("4_vrcmr")
 centered = false
 
@@ -880,7 +880,7 @@ text = "Você morreu."
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("7_1ey3t")
-next_phase_scene_path = "res://scenes/levels/level_02.tscn"
+next_phase_scene_path = "uid://dkaiqhvbamlwc"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1344292889]
 

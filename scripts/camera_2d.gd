@@ -100,7 +100,7 @@ func play_intro_pan(target_global_position: Vector2) -> void:
 		self,
 		"global_position",
 		fixed_target_position,
-		4.5
+		2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	intro_tween.tween_interval(0.35)
@@ -109,7 +109,7 @@ func play_intro_pan(target_global_position: Vector2) -> void:
 		self,
 		"global_position",
 		start_global_position,
-		4.5
+		2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	await intro_tween.finished

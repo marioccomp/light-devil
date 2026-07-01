@@ -249,7 +249,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_stkom")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 10.0
 }, {
@@ -257,7 +257,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5t8rk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_open",
 "speed": 1.0
 }, {
@@ -286,7 +286,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yj8ph")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 10.0
 }]
@@ -423,7 +423,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_octqu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"roll",
 "speed": 12.0
 }]
@@ -560,7 +560,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hqpqd")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -589,7 +589,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_22asx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -618,7 +618,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3d2wx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -749,7 +749,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7u2xx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -778,7 +778,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v3kn6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -807,7 +807,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0upll")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -908,7 +908,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t5bkj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 12.0
 }]
@@ -1009,7 +1009,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hurca")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 12.0
 }]
@@ -1320,6 +1320,7 @@ shape = SubResource("RectangleShape2D_txojl")
 [node name="Portals" type="Node2D" parent="World" unique_id=224629520]
 
 [node name="Portal03Exit" type="Node2D" parent="World/Portals" unique_id=1765883624]
+position = Vector2(3600, 220)
 
 [node name="Visual" type="AnimatedSprite2D" parent="World/Portals/Portal03Exit" unique_id=301420417]
 z_index = 5
@@ -1354,6 +1355,13 @@ script = ExtResource("11_u7n6n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Portals/FakePortal03" unique_id=182427118]
 shape = SubResource("RectangleShape2D_5knf8")
+
+[node name="Visual" type="AnimatedSprite2D" parent="World/Portals/FakePortal03" unique_id=1720786839]
+z_index = 5
+scale = Vector2(2.2, 2.2)
+sprite_frames = SubResource("SpriteFrames_a0ghp")
+animation = &"idle"
+script = ExtResource("25_1m78e")
 
 [node name="LightGameplay" type="Node2D" parent="World" unique_id=1639823949]
 
@@ -1517,7 +1525,7 @@ position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_w7t7a")
 
 [node name="Player" parent="." unique_id=574415046 instance=ExtResource("23_oh1y3")]
-position = Vector2(112, 450)
+position = Vector2(113, 457)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1626238330]
 visible = false
@@ -1649,3 +1657,4 @@ text = "Sombra drenando sua luz"
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("24_gy0ul")
+next_phase_scene_path = "uid://dmopo3h5kthpb"

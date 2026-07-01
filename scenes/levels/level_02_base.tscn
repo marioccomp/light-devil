@@ -277,7 +277,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_stkom")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 10.0
 }, {
@@ -285,7 +285,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5t8rk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_open",
 "speed": 1.0
 }, {
@@ -314,7 +314,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yj8ph")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 10.0
 }]
@@ -423,7 +423,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_octqu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"roll",
 "speed": 12.0
 }]
@@ -566,7 +566,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7u2xx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -595,7 +595,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v3kn6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -624,7 +624,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0upll")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -752,7 +752,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hqpqd")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -781,7 +781,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_22asx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -810,7 +810,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3d2wx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -941,7 +941,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eon8a")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -970,7 +970,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0orgx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -999,7 +999,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_45qx3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -1127,7 +1127,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ylxs8")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 12.0
 }, {
@@ -1156,7 +1156,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3l3y6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -1185,7 +1185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wsgek")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 12.0
 }]
@@ -1289,7 +1289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t5bkj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 12.0
 }]
@@ -1387,7 +1387,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hurca")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 12.0
 }]
@@ -1482,7 +1482,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2rnnj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 12.0
 }]
@@ -2775,7 +2775,7 @@ tile_map_data = PackedByteArray("AAAAAAIAAQABAAUAAAABAAIAAQACAAUAAAACAAIAAQADAAU
 tile_set = SubResource("TileSet_tyxjt")
 
 [node name="Player" parent="." unique_id=574415046 instance=ExtResource("23_oh1y3")]
-position = Vector2(95, 456)
+position = Vector2(118, 456)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1626238330]
 visible = false
@@ -2907,3 +2907,4 @@ text = "Sombra drenando sua luz"
 
 [node name="LevelManager" type="Node" parent="." unique_id=1096244592]
 script = ExtResource("24_gy0ul")
+next_phase_scene_path = "uid://dpvx7savrxmxu"
